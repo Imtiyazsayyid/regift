@@ -2,26 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "rsuite/dist/rsuite.css";
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --rs-primary-100: #e8e8e8;
+  --rs-primary-200: var(--violet-a6);
+  --rs-primary-300: var(--violet-a7);
+  --rs-primary-400: var(--violet-a8);
+  --rs-primary-500: var(--violet-a9);
+  --rs-primary-600: var(--violet-a10);
+  --rs-primary-700: var(--violet-a11);
+  --rs-primary-800: var(--violet-a12);
+  --rs-primary-900: var(--violet-a13);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.rs-btn-primary {
+  background-color: var(--violet-a9);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Poppins";
+}
+
+/* .text-title {
+  font-family: "Caladea";
+} */
+
+.rs-btn-sm {
+  background-color: var(--violet-a9);
+  color: white;
+  height: 2rem;
+}
+
+.rs-picker-select-menu .rs-picker-select-menu-items {
+  padding: 0.5rem;
+}
+
+.rs-picker-default .rs-picker-toggle {
+  background-color: var(--violet-a3) !important;
+}
+
+.rs-picker-select-menu-item:hover {
+  background-color: var(--violet-a9) !important;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rs-picker-error > .rs-input-group {
+  border: 0.5px solid lightgray !important;
+}
+
+.rs-input-group {
+  overflow: hidden;
+}
+
+.rs-input {
+  background: var(--blue-a3);
+  border-radius: 0;
+}
+
+.rs-picker-error > .rs-input-group:focus-within {
+  outline: 1.5px solid var(--blue-a9) !important;
+  transition: all 0.1s;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
 }
