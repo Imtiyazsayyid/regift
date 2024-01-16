@@ -10,7 +10,7 @@ export default function Home() {
         direction={"column"}
         gap={"2"}
       >
-        <Heading className="">Welcome To ReGift</Heading>
+        <Heading className="">Welcome To Mahim</Heading>
         <Text className="w-full" align={"center"}>
           The place where you can donate freely while being assured it goes to
           the right person.
