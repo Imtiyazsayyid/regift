@@ -40,14 +40,14 @@ export default function RootLayout({
           <Toaster />
           <main className={`h-screen bg-slate-100`}>
             <Flex className="w-full h-full p-2" gap={"2"}>
-              <Flex className="w-1/5 bg-white border rounded-lg overflow-hidden">
+              <Flex className="w-1/5 bg-white border rounded-lg overflow-hidden shadow-md">
                 <VerticalNavbar />
               </Flex>
               <Flex className="w-4/5" direction={"column"} gap={"2"}>
-                <Flex className="bg-white border rounded-lg overflow-hidden">
+                <Flex className="bg-white border rounded-lg overflow-hidden shadow-sm">
                   <HorizontalNavBar />
                 </Flex>
-                <Flex className="h-full w-full rounded-lg border overflow-hidden shadow-md bg-white p-5">
+                <Flex className="h-full w-full rounded-lg border overflow-hidden bg-white p-5 shadow-sm">
                   {children}
                 </Flex>
               </Flex>
