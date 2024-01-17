@@ -3,7 +3,6 @@ import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import AuthProvider from "./auth/Provider";
 import "../theme-config.css";
 
 export const metadata: Metadata = {
@@ -37,9 +36,7 @@ export default function RootLayout({
       <body>
         <Theme accentColor="violet">
           <Toaster />
-          {/* <AuthProvider> */}
           <main className={`h-screen`}>{children}</main>
-          {/* </AuthProvider> */}
         </Theme>
       </body>
     </html>
