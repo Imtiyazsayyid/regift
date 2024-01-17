@@ -8,10 +8,12 @@ export default function Home() {
         justify={"center"}
         className="h-full"
         direction={"column"}
-        gap={"2"}
+        gap={"4"}
       >
-        <Heading className="">Welcome To ReGift</Heading>
-        <Text className="w-full" align={"center"}>
+        <Heading size={"9"}>
+          Welcome To <span className="text-blue-600">ReGift</span>
+        </Heading>
+        <Text className="w-1/4 text-slate-600" align={"center"}>
           The place where you can donate freely while being assured it goes to
           the right person.
         </Text>
