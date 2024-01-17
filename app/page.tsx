@@ -2,11 +2,11 @@ import { Flex, Heading, Text } from "@radix-ui/themes";
 
 export default function Home() {
   return (
-    <main className="p-10 h-full">
+    <main className="h-full w-full">
       <Flex
         align={"center"}
         justify={"center"}
-        className="h-full"
+        className="h-full w-full"
         direction={"column"}
         gap={"4"}
       >
