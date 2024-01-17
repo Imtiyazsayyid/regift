@@ -7,15 +7,22 @@ import { useState } from "react";
 import { FaBoxOpen } from "react-icons/fa";
 import { FaUserLarge } from "react-icons/fa6";
 import { FaDonate } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+import { AiFillHome } from "react-icons/ai";
 
 const ListItems = [
+  {
+    link: "/",
+    icon: <AiFillHome className="text-2xl" />,
+    label: "Home",
+  },
   {
     link: "/users",
     icon: <FaUserLarge className="text-xl" />,
     label: "Users",
   },
   {
-    link: "/charitable-organisations",
+    link: "/organisations",
     icon: <FaDonate className="text-2xl" />,
     label: "Charitable Organisations",
   },
@@ -28,10 +35,16 @@ const ListItems = [
 
 const VerticalNavbar = () => {
   const router = useRouter();
-  const [selectedLink, setSelectedLink] = useState("");
+  const currentPath = usePathname();
 
-  const handleSelectLink = (link: string) => {
-    setSelectedLink(link);
+  const isCurrentPath = (itemLink: string) => {
+    if (itemLink === "/" && currentPath === "/") {
+      return true; // Exact match for home
+    } else if (itemLink !== "/" && currentPath.startsWith(itemLink)) {
+      return true; // Starts with for other links
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -54,12 +67,11 @@ const VerticalNavbar = () => {
               <Flex
                 className={
                   "h-[60px] w-full px-5 cursor-pointer rounded-lg " +
-                  (item.link === selectedLink && "bg-blue-600 text-white")
+                  (isCurrentPath(item.link) && "bg-blue-600 text-white")
                 }
                 align={"center"}
                 gap={"3"}
                 onClick={() => {
-                  handleSelectLink(item.link);
                   router.push(item.link);
                 }}
               >
