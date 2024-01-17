@@ -36,15 +36,15 @@ export default function RootLayout({
         ></link>
       </head>
       <body>
-        <Theme accentColor="violet">
+        <Theme accentColor="blue">
           <Toaster />
           <main className={`h-screen bg-slate-100`}>
             <Flex className="w-full h-full p-2" gap={"2"}>
-              <Flex className="w-1/5 bg-white">
+              <Flex className="w-1/5 bg-white border rounded-lg overflow-hidden">
                 <VerticalNavbar />
               </Flex>
               <Flex className="w-4/5" direction={"column"} gap={"2"}>
-                <Flex className="bg-white">
+                <Flex className="bg-white border rounded-lg overflow-hidden">
                   <HorizontalNavBar />
                 </Flex>
                 <Flex className="h-full w-full rounded-lg border overflow-hidden shadow-lg bg-white">

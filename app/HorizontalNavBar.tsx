@@ -4,7 +4,7 @@ import React from "react";
 const HorizontalNavBar = () => {
   return (
     <Flex
-      className="h-[70px] w-full border shadow-md rounded-lg"
+      className="h-[70px] w-full"
       px={"5"}
       align={"center"}
       justify={"between"}
