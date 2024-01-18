@@ -1,0 +1,15 @@
+import { Gender } from "./GenderInterface";
+
+export type Donor = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  gender: Gender;
+  profileImg: string | null;
+  address: string | null;
+  status: boolean;
+  created_at: Date;
+  updated_at: Date;
+};

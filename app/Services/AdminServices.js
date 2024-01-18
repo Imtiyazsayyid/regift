@@ -1,17 +1,17 @@
 import Api from "./Api";
 
-export async function getAllUsers(params) {
-  return await Api.get("/users", { params });
+export async function getAllDonors(params) {
+  return await Api.get("/donors", { params });
 }
 
-export async function getSingleUser() {
-  return await Api.get("/users/:id");
+export async function getSingleDonor(payload) {
+  return await Api.get(`/donor/${payload.id}`);
 }
 
-export async function saveUser(payload) {
-  return await Api.post("/users", payload);
+export async function saveDonor(payload) {
+  return await Api.post("/donors", payload);
 }
 
-export async function deleteUser() {
-  return await Api.delete("/users/:id");
+export async function deleteDonor(id) {
+  return await Api.delete(`/donor/${id}`);
 }

@@ -17,9 +17,9 @@ const ListItems = [
     label: "Home",
   },
   {
-    link: "/users",
+    link: "/donors",
     icon: <FaUserLarge className="text-xl" />,
-    label: "Users",
+    label: "Donors",
   },
   {
     link: "/organisations",

@@ -4,9 +4,10 @@ import React from "react";
 
 interface Props {
   confirmDelete: () => void;
+  removedItem: string;
 }
 
-const DeleteConfirmation = ({ confirmDelete }: Props) => {
+const DeleteConfirmation = ({ confirmDelete, removedItem }: Props) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
@@ -15,9 +16,9 @@ const DeleteConfirmation = ({ confirmDelete }: Props) => {
         </Button>
       </AlertDialog.Trigger>
       <AlertDialog.Content style={{ maxWidth: 450 }}>
-        <AlertDialog.Title>Delete Item.</AlertDialog.Title>
+        <AlertDialog.Title>Confirm Delete.</AlertDialog.Title>
         <AlertDialog.Description size="2">
-          Are you sure you want to remove this item? <br />
+          Are you sure you want to remove {removedItem}? <br />
           This action cannot be reversed.
         </AlertDialog.Description>
 
