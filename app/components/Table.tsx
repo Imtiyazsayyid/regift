@@ -8,7 +8,10 @@ interface Props {
 
 const AppTable = ({ titles, children }: Props) => {
   return (
-    <Table.Root variant="surface" className="w-full">
+    <Table.Root
+      variant="surface"
+      className="w-full max-h-[98%] overflow-hidden"
+    >
       <Table.Header>
         <Table.Row>
           {titles.map((title) => (

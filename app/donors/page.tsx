@@ -35,13 +35,13 @@ const DonorsPage = () => {
     currentItems: currentDonors,
     setCurrentPage,
     totalPages,
-  } = usePagination(donors, 10);
+  } = usePagination(donors, 8);
 
   return (
     <Flex className="w-full" direction={"column"} gap={"2"}>
-      <Flex className="h-20 w-full border rounded-lg shadow-sm"></Flex>
+      <Flex className="min-h-20 w-full border rounded-lg shadow-sm"></Flex>
       <Flex
-        className="h-full w-full rounded-lg shadow-lg border"
+        className="h-full w-full rounded-lg shadow-lg border overflow-hidden"
         direction={"column"}
         justify={"between"}
         p={"4"}
