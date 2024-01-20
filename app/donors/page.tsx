@@ -67,7 +67,7 @@ const DonorsPage = () => {
                 <TableActions
                   editLink={`/donor/edit/${donor.id}`}
                   viewLink={`/donor/view/${donor.id}`}
-                  removedItem="donor"
+                  removedItem={`donor "${donor.firstName} ${donor.lastName}"`}
                   deleteFunction={() => AdminServices.deleteDonor(donor.id)}
                   fetchData={getAllDonors}
                 />
