@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Flex, Select, Table, Text } from "@radix-ui/themes";
+import { Avatar, Button, Flex, Select, Table, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import AppTable from "../components/Table";
 import * as AdminServices from "../Services/AdminServices";
@@ -11,11 +11,15 @@ import Pagination from "../components/Pagination";
 import { Donor } from "../interfaces/DonorInterface";
 import SearchBar from "../components/SearchBar";
 import EntriesPerPage from "../components/EntriesPerPage";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { usePathname, useRouter } from "next/navigation";
 
 const DonorsPage = () => {
   const tableTitles = ["#", "Profile", "Full Name", "Email", "Actions"];
   const [donors, setDonors] = useState<Donor[]>([]);
   const [entriesPerPage, setEntriesPerPage] = useState(7);
+  const router = useRouter();
+  const currentPath = usePathname();
 
   // filters
   const [searchText, setSearchText] = useState("");
@@ -56,11 +60,17 @@ const DonorsPage = () => {
           setSearchText={setSearchText}
           placeholder="Find a donor"
         />
-        <Flex>
+        <Flex align={"end"} gap={"2"}>
           <EntriesPerPage
             entriesPerPage={entriesPerPage}
             setEntriesPerPage={(val) => setEntriesPerPage(val)}
           />
+          <Button
+            variant="surface"
+            onClick={() => router.push(currentPath + "/new")}
+          >
+            <PlusIcon /> Add New
+          </Button>
         </Flex>
       </Flex>
       <Flex
@@ -90,8 +100,7 @@ const DonorsPage = () => {
 
               <Table.Cell>
                 <TableActions
-                  editLink={`/donor/edit/${donor.id}`}
-                  viewLink={`/donor/view/${donor.id}`}
+                  id={donor.id}
                   removedItem={`donor "${donor.firstName} ${donor.lastName}"`}
                   deleteFunction={() => AdminServices.deleteDonor(donor.id)}
                   fetchData={getAllDonors}

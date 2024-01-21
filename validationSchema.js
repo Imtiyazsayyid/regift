@@ -21,13 +21,9 @@ const donorSchema = z.object({
     .refine((data) => allowedGenders.includes(data), {
       message: "Invalid gender",
     }),
-  userTypeId: z.number({
-    required_error: "User Type is required",
-    invalid_type_error: "User Type is required",
-  }),
 });
 
-const allowedApprovalStatus = ["pending", "approved", "rejected"];
+const allowedApprovalStatus = ["pending", "approved", "rejescted"];
 
 const organisationSchema = z.object({
   name: z

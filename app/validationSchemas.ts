@@ -2,7 +2,7 @@ import z from "zod";
 
 const allowedGenders = ["male", "female", "other"];
 
-const userShema = z.object({
+const donorSchema = z.object({
   firstName: z
     .string({ required_error: "First Name is required" })
     .min(2, "First Name is too short")
@@ -21,10 +21,70 @@ const userShema = z.object({
     .refine((data) => allowedGenders.includes(data), {
       message: "Invalid gender",
     }),
-  userTypeId: z.number({
-    required_error: "User Type is required",
-    invalid_type_error: "User Type is required",
-  }),
 });
 
-export { userShema };
+const allowedApprovalStatus = ["pending", "approved", "rejected"];
+
+const organisationSchema = z.object({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(2, "Name is too short")
+    .max(100, "Name is too long"),
+  email: z.string({ required_error: "Email is required" }).email(),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(3, "Password is too short")
+    .max(45, "Password is too long"),
+  website: z.string({ required_error: "Website is required" }).url(),
+  address: z
+    .string({ required_error: "Address is required" })
+    .min(5, "Address is too short")
+    .max(255, "Address is too long"),
+  approvalStatus: z
+    .string({ required_error: "Approval Status is required" })
+    .refine((data) => allowedApprovalStatus.includes(data), {
+      message: "Invalid approval status",
+    }),
+  status: z.boolean({ required_error: "Status is required" }),
+});
+
+const allowedCondtions = [
+  "new",
+  "like_new",
+  "used_good",
+  "used_fair",
+  "used_poor",
+];
+
+const donatedItemSchema = z.object({
+  title: z
+    .string({ required_error: "Title is required" })
+    .min(2, "Title is too short")
+    .max(100, "Title is too long"),
+  quantity: z.number({ required_error: "Quantity is required" }),
+  condition: z
+    .string({ required_error: "Condition is required" })
+    .refine((data) => allowedCondtions.includes(data), {
+      message: "Invalid condition",
+    }),
+  isPickupAvailable: z.boolean({
+    required_error: "Is Pickup Available is required ",
+  }),
+  approvalStatus: z
+    .string({ required_error: "Approval Status is required" })
+    .refine((data) => allowedApprovalStatus.includes(data), {
+      message: "Invalid approval status",
+    }),
+
+  categoryId: z.number({ required_error: "Category Id is required" }),
+  userId: z.number({ required_error: "User Id is required" }),
+});
+
+const categorySchema = z.object({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(2, "Name is too small")
+    .max(100, "Name is too long"),
+});
+
+export { donorSchema, organisationSchema, donatedItemSchema, categorySchema };

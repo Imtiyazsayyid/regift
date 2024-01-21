@@ -8,13 +8,12 @@ import {
 } from "@radix-ui/react-icons";
 import { Button, Flex } from "@radix-ui/themes";
 import axios, { Axios, AxiosResponse } from "axios";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { ReactNode } from "react";
 import toast from "react-hot-toast";
 
 interface Props {
-  editLink?: string;
-  viewLink?: string;
+  id?: number;
   deleteFunction?: () => Promise<AxiosResponse>;
   removedItem: string;
   editModal?: ReactNode;
@@ -22,14 +21,14 @@ interface Props {
 }
 
 const TableActions = ({
-  editLink,
-  viewLink,
+  id,
   deleteFunction,
   removedItem,
   fetchData,
   editModal,
 }: Props) => {
   const router = useRouter();
+  const currentPath = usePathname();
 
   const handleDelete = async () => {
     try {
@@ -53,21 +52,21 @@ const TableActions = ({
       className="shadow-sm w-fit p-2 rounded-full border"
       justify={"center"}
     >
-      {viewLink && (
+      {id && (
         <Button
           variant="soft"
           color="blue"
-          onClick={() => router.push(viewLink)}
+          onClick={() => router.push(currentPath + "/view/" + id)}
           radius="full"
         >
           <EyeOpenIcon />
         </Button>
       )}
-      {editLink && (
+      {id && (
         <Button
           variant="soft"
           color="violet"
-          onClick={() => router.push(editLink)}
+          onClick={() => router.push(currentPath + "/edit/" + id)}
           radius="full"
         >
           <Pencil2Icon />

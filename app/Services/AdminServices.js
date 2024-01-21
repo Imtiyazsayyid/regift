@@ -5,8 +5,8 @@ export async function getAllDonors(params) {
   return await Api.get("/donors", { params });
 }
 
-export async function getSingleDonor(payload) {
-  return await Api.get(`/donor/${payload.id}`);
+export async function getSingleDonor(id) {
+  return await Api.get(`/donor/${id}`);
 }
 
 export async function saveDonor(payload) {
@@ -80,8 +80,3 @@ export async function getSingleDonatedItem(payload) {
 export async function deleteDonatedItem(id) {
   return await Api.delete(`/donated-item/${id}`);
 }
-
-
-
-
-
