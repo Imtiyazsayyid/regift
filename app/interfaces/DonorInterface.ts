@@ -1,12 +1,10 @@
-import { Gender } from "./GenderInterface";
-
 export type Donor = {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  gender: Gender;
+  gender: "male" | "female" | "other";
   profileImg: string | null;
   address: string | null;
   status: boolean;
