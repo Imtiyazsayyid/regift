@@ -22,8 +22,8 @@ export async function getAllOrganisations(params) {
   return await Api.get("/organisations", { params });
 }
 
-export async function getSingleOrganisation(payload) {
-  return await Api.get(`/organisation/${payload.id}`);
+export async function getSingleOrganisation(id) {
+  return await Api.get(`/organisation/${id}`);
 }
 
 export async function saveOrganisation(payload) {
@@ -39,8 +39,8 @@ export async function getAllInventories(params) {
   return await Api.get("/inventories", { params });
 }
 
-export async function getSingleInventory(payload) {
-  return await Api.get(`/inventory/${payload.id}`);
+export async function getSingleInventory(id) {
+  return await Api.get(`/inventory/${id}`);
 }
 
 export async function saveInventory(payload) {
@@ -56,8 +56,8 @@ export async function getAllCategories(params) {
   return await Api.get("/categories", { params });
 }
 
-export async function getSingleCategory(payload) {
-  return await Api.get(`/category/${payload.id}`);
+export async function getSingleCategory(id) {
+  return await Api.get(`/category/${id}`);
 }
 
 export async function saveCategory(payload) {
@@ -73,8 +73,8 @@ export async function getAllDonatedItems(params) {
   return await Api.get("/donated-items", { params });
 }
 
-export async function getSingleDonatedItem(payload) {
-  return await Api.get(`/donated-item/${payload.id}`);
+export async function getSingleDonatedItem(id) {
+  return await Api.get(`/donated-item/${id}`);
 }
 
 export async function deleteDonatedItem(id) {
