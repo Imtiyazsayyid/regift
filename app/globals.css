@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import "rsuite/dist/rsuite.css"; */
-
 :root {
   --rs-primary-100: #e8e8e8;
   --rs-primary-200: var(--violet-a6);

@@ -25,7 +25,7 @@ const ApprovalStatusBadge = ({ status }: Props) => {
   }
 
   return (
-    <Badge radius="full" color={color} className="h-7">
+    <Badge radius="full" color={color} className="h-6">
       <Flex gap={"1"} align={"center"}>
         {icon}
         {status[0].toUpperCase()}

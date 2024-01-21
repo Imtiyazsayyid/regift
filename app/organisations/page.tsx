@@ -12,6 +12,8 @@ import { Organisation } from "../interfaces/OrganisationInterface";
 import SearchBar from "../components/SearchBar";
 import EntriesPerPage from "../components/EntriesPerPage";
 import ApprovalStatusBadge from "../components/ApprovalStatusBadge";
+import ApprovalStatusFilter from "../components/ApprovalStatusFilter";
+import getEmptyOrValue from "../helpers/selectHelpers";
 
 const OrganisationsPage = () => {
   const tableTitles = [
@@ -28,10 +30,14 @@ const OrganisationsPage = () => {
 
   // filters
   const [searchText, setSearchText] = useState("");
+  const [approvalStatus, setApprovalStatus] = useState("all");
 
   const getAllOrganisations = async () => {
     try {
-      const res = await AdminServices.getAllOrganisations({ searchText });
+      const res = await AdminServices.getAllOrganisations({
+        searchText,
+        approvalStatus: getEmptyOrValue(approvalStatus),
+      });
       if (res.status) {
         setOrganisations(res.data.data);
       }
@@ -43,7 +49,7 @@ const OrganisationsPage = () => {
 
   useEffect(() => {
     getAllOrganisations();
-  }, [searchText]);
+  }, [searchText, approvalStatus]);
 
   const {
     currentPage,
@@ -65,10 +71,14 @@ const OrganisationsPage = () => {
           setSearchText={setSearchText}
           placeholder="Find an organisation"
         />
-        <Flex>
+        <Flex gap={"2"}>
+          <ApprovalStatusFilter
+            approvalStatus={approvalStatus}
+            setApprovalStatus={setApprovalStatus}
+          />
           <EntriesPerPage
             entriesPerPage={entriesPerPage}
-            setEntriesPerPage={(val) => setEntriesPerPage(val)}
+            setEntriesPerPage={setEntriesPerPage}
           />
         </Flex>
       </Flex>
