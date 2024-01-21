@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Flex, Select, Table, Text } from "@radix-ui/themes";
+import { Avatar, Flex, Select, Table, Text, Button } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import AppTable from "../components/Table";
 import * as AdminServices from "../Services/AdminServices";
@@ -14,6 +14,8 @@ import EntriesPerPage from "../components/EntriesPerPage";
 import ApprovalStatusBadge from "../components/ApprovalStatusBadge";
 import ApprovalStatusFilter from "../components/ApprovalStatusFilter";
 import getEmptyOrValue from "../helpers/selectHelpers";
+import { PlusIcon } from '@radix-ui/react-icons';
+import { usePathname, useRouter } from "next/navigation";
 
 const OrganisationsPage = () => {
   const tableTitles = [
@@ -27,7 +29,9 @@ const OrganisationsPage = () => {
   ];
   const [organisations, setOrganisations] = useState<Organisation[]>([]);
   const [entriesPerPage, setEntriesPerPage] = useState(7);
-
+  const router = useRouter();
+  const currentPath = usePathname();
+  
   // filters
   const [searchText, setSearchText] = useState("");
   const [approvalStatus, setApprovalStatus] = useState("all");
@@ -71,7 +75,7 @@ const OrganisationsPage = () => {
           setSearchText={setSearchText}
           placeholder="Find an organisation"
         />
-        <Flex gap={"2"}>
+        <Flex align={"end"}  gap={"2"}>
           <ApprovalStatusFilter
             approvalStatus={approvalStatus}
             setApprovalStatus={setApprovalStatus}
@@ -80,6 +84,12 @@ const OrganisationsPage = () => {
             entriesPerPage={entriesPerPage}
             setEntriesPerPage={setEntriesPerPage}
           />
+          <Button
+            variant="surface"
+            onClick={() => router.push(currentPath + "/new")}
+          >
+            <PlusIcon /> Add New
+          </Button>
         </Flex>
       </Flex>
       <Flex
