@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Flex, Table } from "@radix-ui/themes";
+import { Avatar, Flex, Select, Table, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import AppTable from "../components/Table";
 import * as AdminServices from "../Services/AdminServices";
@@ -9,14 +9,20 @@ import TableActions from "../components/TableActions";
 import usePagination from "../hooks/usePagination";
 import Pagination from "../components/Pagination";
 import { Donor } from "../interfaces/DonorInterface";
+import SearchBar from "../components/SearchBar";
+import EntriesPerPage from "../components/EntriesPerPage";
 
 const DonorsPage = () => {
   const tableTitles = ["#", "Profile", "Full Name", "Email", "Actions"];
   const [donors, setDonors] = useState<Donor[]>([]);
+  const [entriesPerPage, setEntriesPerPage] = useState(7);
+
+  // filters
+  const [searchText, setSearchText] = useState("");
 
   const getAllDonors = async () => {
     try {
-      const res = await AdminServices.getAllDonors();
+      const res = await AdminServices.getAllDonors({ searchText });
       if (res.status) {
         setDonors(res.data.data);
       }
@@ -28,18 +34,35 @@ const DonorsPage = () => {
 
   useEffect(() => {
     getAllDonors();
-  }, []);
+  }, [searchText]);
 
   const {
     currentPage,
     currentItems: currentDonors,
     setCurrentPage,
     totalPages,
-  } = usePagination(donors, 8);
+  } = usePagination(donors, entriesPerPage);
 
   return (
     <Flex className="w-full" direction={"column"} gap={"2"}>
-      <Flex className="min-h-20 w-full border rounded-lg shadow-sm"></Flex>
+      <Flex
+        className="min-h-20 border rounded-lg shadow-sm"
+        p={"4"}
+        align={"center"}
+        justify={"between"}
+      >
+        <SearchBar
+          searchText={searchText}
+          setSearchText={setSearchText}
+          placeholder="Find a donor"
+        />
+        <Flex>
+          <EntriesPerPage
+            entriesPerPage={entriesPerPage}
+            setEntriesPerPage={(val) => setEntriesPerPage(val)}
+          />
+        </Flex>
+      </Flex>
       <Flex
         className="h-full w-full rounded-lg shadow-lg border overflow-hidden"
         direction={"column"}
@@ -49,7 +72,9 @@ const DonorsPage = () => {
         <AppTable titles={tableTitles}>
           {currentDonors?.map((donor, index) => (
             <Table.Row align={"center"} key={index}>
-              <Table.Cell>{index + 1}</Table.Cell>
+              <Table.Cell>
+                {index + 1 + currentPage * entriesPerPage}
+              </Table.Cell>
               <Table.Cell>
                 <Avatar
                   size={"2"}
