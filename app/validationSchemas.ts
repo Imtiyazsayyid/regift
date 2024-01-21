@@ -61,15 +61,13 @@ const donatedItemSchema = z.object({
     .string({ required_error: "Title is required" })
     .min(2, "Title is too short")
     .max(100, "Title is too long"),
+  image: z.string({ required_error: "Image is required" }),
   quantity: z.number({ required_error: "Quantity is required" }),
   condition: z
     .string({ required_error: "Condition is required" })
     .refine((data) => allowedCondtions.includes(data), {
       message: "Invalid condition",
     }),
-  isPickupAvailable: z.boolean({
-    required_error: "Is Pickup Available is required ",
-  }),
   approvalStatus: z
     .string({ required_error: "Approval Status is required" })
     .refine((data) => allowedApprovalStatus.includes(data), {
