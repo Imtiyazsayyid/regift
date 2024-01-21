@@ -114,23 +114,6 @@ const OrganisationForm = ({
 
     toast.success("Saved Successfully");
     router.back();
-
-  //   try {
-  //     const res = await AdminServices.saveOrganisation(organisationDetails);
-      
-  //     console.log("Server response:", res); 
-  
-  //     if (!res.data.status) {
-  //       toast.error("Failed To Save");
-  //       return;
-  //     }
-  
-  //     toast.success("Saved Successfully");
-  //     router.back();
-  //   } catch (error) {
-  //     console.error("Error saving organisation:", error);
-  //     toast.error("Failed To Save");
-  //   }
   };
 
   return (
@@ -221,7 +204,6 @@ const OrganisationForm = ({
         </Flex>
         <Flex direction={"column"} className="w-1/3" gap={"1"}>
           <Text className="text-xs text-slate-400">Acronym</Text>
-          {/* <Text className="text-xs text-red-400">{errors}</Text> */}
           <TextField.Root>
             <TextField.Input
               value={organisationDetails.acronym}
@@ -318,12 +300,12 @@ const OrganisationForm = ({
           </TextField.Root>
         </Flex>
       </Flex>
-      
-    
+
       {/* row 4 */}
       <Flex className="w-full" gap={"4"} align={"end"}>
         <Flex direction={"column"} className="w-1/3 h-40" gap={"1"}>
           <Text className="text-xs text-slate-400">Address</Text>
+          <Text className="text-xs text-red-400">{errors.address}</Text>
           <TextArea
             className="h-full w-full"
             value={organisationDetails.address}

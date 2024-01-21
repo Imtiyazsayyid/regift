@@ -35,7 +35,7 @@ const organisationSchema = z.object({
     .string({ required_error: "Password is required" })
     .min(3, "Password is too short")
     .max(45, "Password is too long"),
-  websiteUrl: z.string({ required_error: "Website is required" }).url(),
+  websiteUrl: z.string({ required_error: "Website is required" }),
   address: z
     .string({ required_error: "Address is required" })
     .min(5, "Address is too short")
