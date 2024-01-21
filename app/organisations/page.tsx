@@ -111,8 +111,7 @@ const OrganisationsPage = () => {
 
               <Table.Cell>
                 <TableActions
-                  editLink={`/organisation/edit/${organisation.id}`}
-                  viewLink={`/organisation/view/${organisation.id}`}
+                  id={organisation.id}
                   removedItem={`organisation "${organisation.name}"`}
                   deleteFunction={() =>
                     AdminServices.deleteOrganisation(organisation.id)
