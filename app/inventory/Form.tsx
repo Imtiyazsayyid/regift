@@ -277,7 +277,9 @@ const DonatedItemForm = ({
         </Flex>
 
         <Flex direction={"column"} className="w-1/6" gap={"1"}>
-          <Text className="text-xs text-slate-400">Approval Status</Text>
+          <Text className="text-xs text-slate-400">
+            Approval Status {donatedItemDetails.approvalStatus}
+          </Text>
           <Text className="text-xs text-red-400">{errors.title}</Text>
           <Select.Root
             value={donatedItemDetails.approvalStatus}
@@ -290,7 +292,6 @@ const DonatedItemForm = ({
           >
             <Select.Trigger className="w-full" />
             <Select.Content position="popper">
-              <Select.Item value={"all"}>All</Select.Item>
               <Select.Item value="pending">Pending</Select.Item>
               <Select.Item value="approved">Approved</Select.Item>
               <Select.Item value="rejected">Rejected</Select.Item>

@@ -54,7 +54,7 @@ const OrganisationForm = ({
     websiteUrl: "",
     logo: "",
     address: "",
-    approvalStatus: "",
+    approvalStatus: "pending",
   });
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const OrganisationForm = ({
       websiteUrl: websiteUrl || "",
       logo: logo || "",
       address: address || "",
-      approvalStatus: approvalStatus || "",
+      approvalStatus: approvalStatus || "pending",
     });
   }, [id, name, acronym, email, password, websiteUrl, logo, address]);
 
@@ -294,10 +294,24 @@ const OrganisationForm = ({
         </Flex>
 
         <Flex direction={"column"} className="w-1/3" gap={"1"}>
-          <Text className="text-xs text-slate-400">Placeholder Field</Text>
-          <TextField.Root>
-            <TextField.Input />
-          </TextField.Root>
+          <Text className="text-xs text-slate-400">Approval Status</Text>
+          <Text className="text-xs text-red-400">{errors.name}</Text>
+          <Select.Root
+            value={organisationDetails.approvalStatus}
+            onValueChange={(val) =>
+              setOrganisationDetails({
+                ...organisationDetails,
+                approvalStatus: val,
+              })
+            }
+          >
+            <Select.Trigger className="w-full" />
+            <Select.Content position="popper">
+              <Select.Item value="pending">Pending</Select.Item>
+              <Select.Item value="approved">Approved</Select.Item>
+              <Select.Item value="rejected">Rejected</Select.Item>
+            </Select.Content>
+          </Select.Root>
         </Flex>
       </Flex>
 
