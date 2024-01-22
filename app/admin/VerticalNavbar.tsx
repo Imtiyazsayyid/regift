@@ -1,6 +1,6 @@
 "use client";
 
-import { CaretDownIcon } from "@radix-ui/react-icons";
+import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
@@ -108,7 +108,10 @@ const VerticalNavbar = () => {
                 align={"center"}
                 justify={"between"}
                 onClick={() => {
-                  if (item.subLinks) return;
+                  if (item.subLinks) {
+                    handleOpen(item.link);
+                    return;
+                  }
                   router.push(item.link);
                 }}
               >
@@ -118,7 +121,7 @@ const VerticalNavbar = () => {
                 </Flex>
                 {item.subLinks && item.subLinks?.length > 0 && (
                   <Flex>
-                    <CaretDownIcon onClick={() => handleOpen(item.link)} />
+                    {!item.isOpen ? <CaretDownIcon /> : <CaretUpIcon />}
                   </Flex>
                 )}
               </Flex>
