@@ -2,6 +2,11 @@ import z from "zod";
 
 const allowedGenders = ["male", "female", "other"];
 
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1, "Invalid Password"),
+});
+
 const donorSchema = z.object({
   firstName: z
     .string({ required_error: "First Name is required" })
@@ -79,4 +84,10 @@ const categorySchema = z.object({
     .max(100, "Name is too long"),
 });
 
-export { donorSchema, organisationSchema, donatedItemSchema, categorySchema };
+export {
+  donorSchema,
+  organisationSchema,
+  donatedItemSchema,
+  categorySchema,
+  loginSchema,
+};
