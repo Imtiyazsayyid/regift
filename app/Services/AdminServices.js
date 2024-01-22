@@ -34,23 +34,6 @@ export async function deleteOrganisation(id) {
   return await Api.delete(`/organisation/${id}`);
 }
 
-//Inventory
-export async function getAllInventories(params) {
-  return await Api.get("/inventories", { params });
-}
-
-export async function getSingleInventory(id) {
-  return await Api.get(`/inventory/${id}`);
-}
-
-export async function saveInventory(payload) {
-  return await Api.post("/inventories", payload);
-}
-
-export async function deleteInventory(id) {
-  return await Api.delete(`/inventory/${id}`);
-}
-
 // Category
 export async function getAllCategories(params) {
   return await Api.get("/categories", { params });

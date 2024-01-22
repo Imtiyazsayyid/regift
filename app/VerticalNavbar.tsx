@@ -1,14 +1,12 @@
 "use client";
 
-import { Box, Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-import { FaBoxOpen } from "react-icons/fa";
-import { FaUserLarge } from "react-icons/fa6";
-import { FaDonate } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { AiFillHome } from "react-icons/ai";
+import { FaBoxOpen, FaDonate } from "react-icons/fa";
+import { FaCartShopping, FaUserLarge } from "react-icons/fa6";
 
 const ListItems = [
   {
@@ -30,6 +28,11 @@ const ListItems = [
     link: "/donated-items",
     icon: <FaBoxOpen className="text-2xl" />,
     label: "Donated Items",
+  },
+  {
+    link: "/orders",
+    icon: <FaCartShopping className="text-2xl" />,
+    label: "Orders",
   },
 ];
 

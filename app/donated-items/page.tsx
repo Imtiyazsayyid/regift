@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Flex, Select, Table, Text } from "@radix-ui/themes";
+import { Avatar, Flex, Select, Switch, Table, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import AppTable from "../components/Table";
 import * as AdminServices from "../Services/AdminServices";
@@ -14,9 +14,14 @@ import EntriesPerPage from "../components/EntriesPerPage";
 import ApprovalStatusBadge from "../components/ApprovalStatusBadge";
 import ApprovalStatusFilter from "../components/ApprovalStatusFilter";
 import CategoryFilter from "../components/CategoryFilter";
-import getEmptyOrValue from "../helpers/selectHelpers";
+import {
+  getEmptyOrValue,
+  getEmptyOrValueForAvailability,
+} from "../helpers/selectHelpers";
 import { getConditionByKey } from "../helpers/EnumValues";
 import ConditionBadge from "../components/ConditionBadge";
+import ConditionFilter from "../components/ConditionFilter";
+import AvailablityFilter from "../components/AvailablityFilter";
 
 const DonatedItemsPage = () => {
   const tableTitles = [
@@ -36,6 +41,8 @@ const DonatedItemsPage = () => {
   const [searchText, setSearchText] = useState("");
   const [approvalStatus, setApprovalStatus] = useState("all");
   const [category, setCategory] = useState("all");
+  const [condition, setCondition] = useState("all");
+  const [availability, setAvailability] = useState("available");
 
   const getAllDonatedItems = async () => {
     try {
@@ -43,6 +50,8 @@ const DonatedItemsPage = () => {
         searchText,
         approvalStatus: getEmptyOrValue(approvalStatus),
         categoryId: getEmptyOrValue(category),
+        condition: getEmptyOrValue(condition),
+        availability: getEmptyOrValueForAvailability(availability),
       });
       if (res.status) {
         setDonatedItems(res.data.data);
@@ -55,7 +64,7 @@ const DonatedItemsPage = () => {
 
   useEffect(() => {
     getAllDonatedItems();
-  }, [searchText, approvalStatus, category]);
+  }, [searchText, approvalStatus, category, condition, availability]);
 
   const {
     currentPage,
@@ -78,6 +87,11 @@ const DonatedItemsPage = () => {
           placeholder="Find donated items"
         />
         <Flex gap={"2"}>
+          <AvailablityFilter
+            setAvailability={setAvailability}
+            availability={availability}
+          />
+          <ConditionFilter condition={condition} setCondition={setCondition} />
           <CategoryFilter category={category} setCategory={setCategory} />
           <ApprovalStatusFilter
             approvalStatus={approvalStatus}

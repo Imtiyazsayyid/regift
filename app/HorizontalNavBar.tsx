@@ -1,5 +1,8 @@
+"use client";
+
 import { Avatar, Flex, Heading, Text } from "@radix-ui/themes";
 import React from "react";
+import GoBack from "./components/GoBack";
 
 const HorizontalNavBar = () => {
   return (
@@ -9,7 +12,9 @@ const HorizontalNavBar = () => {
       align={"center"}
       justify={"between"}
     >
-      <Flex>{/* <Heading size={"5"}></Heading> */}</Flex>
+      <Flex>
+        <GoBack />
+      </Flex>
       <Flex gap={"3"} align={"center"} className="">
         <Flex direction={"column"} align={"end"}>
           <Heading size={"2"}>Imtiyaz Sayyid</Heading>

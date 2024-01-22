@@ -10,7 +10,7 @@ const GoBack = ({ className }: { className?: string }) => {
       <ArrowLeftIcon
         onClick={() => router.back()}
         className={
-          "border h-8 w-8 p-2 rounded-full bg-[var(--violet-a4)] text-[var(--violet-a11)]" +
+          "border h-8 w-8 p-2 rounded-full bg-[var(--indigo-a4)] text-[var(--indigo-a11)]" +
           className
         }
       />
