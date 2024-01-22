@@ -31,6 +31,7 @@ interface Props {
   condition?: string;
   approvalStatus?: string;
   description?: string;
+  donorId?: number;
 }
 
 const DonatedItemForm = ({
@@ -42,6 +43,7 @@ const DonatedItemForm = ({
   description,
   condition,
   approvalStatus,
+  donorId,
 }: Props) => {
   const router = useRouter();
   const [categories, setCategories] = useState<Category[]>([]);
@@ -64,6 +66,7 @@ const DonatedItemForm = ({
     categoryId: null as number | null,
     image: "",
     description: "",
+    donorId: null as number | null,
   });
 
   useEffect(() => {
@@ -74,6 +77,7 @@ const DonatedItemForm = ({
       condition: condition || "",
       approvalStatus: approvalStatus || "",
       categoryId: categoryId || null,
+      donorId: donorId || null,
       quantity: quantity || null,
       description: description || "",
     });
@@ -85,6 +89,7 @@ const DonatedItemForm = ({
     image,
     quantity,
     description,
+    donorId,
     condition,
     approvalStatus,
     categoryId,
@@ -233,7 +238,7 @@ const DonatedItemForm = ({
           <Text className="text-xs text-red-400">{errors.title}</Text>
 
           <Select.Root
-            value={categoryId?.toString()}
+            value={donatedItemDetails.categoryId?.toString()}
             onValueChange={(val) =>
               setDonatedItemDetails({
                 ...donatedItemDetails,
@@ -277,9 +282,7 @@ const DonatedItemForm = ({
         </Flex>
 
         <Flex direction={"column"} className="w-1/6" gap={"1"}>
-          <Text className="text-xs text-slate-400">
-            Approval Status {donatedItemDetails.approvalStatus}
-          </Text>
+          <Text className="text-xs text-slate-400">Approval Status</Text>
           <Text className="text-xs text-red-400">{errors.title}</Text>
           <Select.Root
             value={donatedItemDetails.approvalStatus}

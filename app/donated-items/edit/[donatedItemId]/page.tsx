@@ -49,6 +49,7 @@ const page = ({ params }: Props) => {
         categoryId={donatedItem?.categoryId}
         approvalStatus={donatedItem?.approvalStatus || ""}
         condition={donatedItem?.condition}
+        donorId={donatedItem?.donorId}
       />
     </Flex>
   );

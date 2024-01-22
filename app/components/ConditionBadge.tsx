@@ -26,7 +26,7 @@ const ApprovalStatusBadge = ({ condition }: Props) => {
   }
 
   return (
-    <Badge radius="full" color={color} className="h-6">
+    <Badge radius="full" color={color} className="h-6" variant="surface">
       <Flex gap={"1"} align={"center"}>
         {getConditionByKey(condition)}
       </Flex>

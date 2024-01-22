@@ -27,9 +27,9 @@ const ListItems = [
     label: "Charitable Organisations",
   },
   {
-    link: "/inventory",
+    link: "/donated-items",
     icon: <FaBoxOpen className="text-2xl" />,
-    label: "Inventory",
+    label: "Donated Items",
   },
 ];
 
