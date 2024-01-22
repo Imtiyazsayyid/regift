@@ -4,6 +4,8 @@ import { LockClosedIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Flex, TextField, Button } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import * as AdminServices from "../../Services/AdminServices";
+import { TokenService } from "../../Services/StorageService";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [userDetails, setUserDetails] = useState({
@@ -11,10 +13,26 @@ const LoginPage = () => {
     password: "",
     user_role: "admin",
   });
+  const router = useRouter();
 
   const handleSubmit = async () => {
     const res = await AdminServices.login(userDetails);
-    console.log({ res });
+
+    if (res.data.status) {
+      const refreshToken = res.data.data;
+
+      const accessTokenResponse = await AdminServices.getAccessToken(
+        refreshToken
+      );
+
+      console.log({ accessTokenResponse });
+
+      if (!accessTokenResponse.data.status) {
+        throw new Error("status false in getting Access Token");
+      }
+      TokenService.saveAccessToken(accessTokenResponse.data.data);
+      router.push("/admin");
+    }
   };
 
   return (
