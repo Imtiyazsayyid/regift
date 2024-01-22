@@ -1,5 +1,6 @@
 "use client";
 
+import { CaretDownIcon } from "@radix-ui/react-icons";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
@@ -7,38 +8,67 @@ import { usePathname } from "next/navigation";
 import { AiFillHome } from "react-icons/ai";
 import { FaBoxOpen, FaDonate } from "react-icons/fa";
 import { FaCartShopping, FaUserLarge } from "react-icons/fa6";
-
-const ListItems = [
-  {
-    link: "/",
-    icon: <AiFillHome className="text-2xl" />,
-    label: "Home",
-  },
-  {
-    link: "/donors",
-    icon: <FaUserLarge className="text-xl" />,
-    label: "Donors",
-  },
-  {
-    link: "/organisations",
-    icon: <FaDonate className="text-2xl" />,
-    label: "Charitable Organisations",
-  },
-  {
-    link: "/donated-items",
-    icon: <FaBoxOpen className="text-2xl" />,
-    label: "Donated Items",
-  },
-  {
-    link: "/orders",
-    icon: <FaCartShopping className="text-2xl" />,
-    label: "Orders",
-  },
-];
+import { RiLayout2Fill } from "react-icons/ri";
+import { FaGift } from "react-icons/fa6";
+import { BiSolidCategory } from "react-icons/bi";
+import { useState } from "react";
 
 const VerticalNavbar = () => {
+  const [ListItems, setListItems] = useState([
+    {
+      link: "/",
+      icon: <AiFillHome className="text-2xl" />,
+      isOpen: false,
+      label: "Home",
+    },
+    {
+      link: "/masters",
+      icon: <FaGift className="text-2xl" />,
+      label: "Masters",
+      isOpen: false,
+      subLinks: [
+        {
+          link: "/categories",
+          icon: <BiSolidCategory className="text-2xl" />,
+          label: "Categories",
+        },
+      ],
+    },
+    {
+      link: "/donors",
+      isOpen: false,
+      icon: <FaUserLarge className="text-xl" />,
+      label: "Donors",
+    },
+    {
+      link: "/organisations",
+      isOpen: false,
+      icon: <FaDonate className="text-2xl" />,
+      label: "Charitable Organisations",
+    },
+    {
+      link: "/donated-items",
+      isOpen: false,
+      icon: <FaBoxOpen className="text-2xl" />,
+      label: "Donated Items",
+    },
+    {
+      link: "/orders",
+      isOpen: false,
+      icon: <FaCartShopping className="text-2xl" />,
+      label: "Orders",
+    },
+  ]);
+
   const router = useRouter();
   const currentPath = usePathname();
+
+  const handleOpen = (link: string) => {
+    const updatedListItems = ListItems.map((item) =>
+      item.link === link ? { ...item, isOpen: !item.isOpen } : item
+    );
+    setListItems(updatedListItems);
+  };
 
   const isCurrentPath = (itemLink: string) => {
     if (itemLink === "/" && currentPath === "/") {
@@ -73,14 +103,45 @@ const VerticalNavbar = () => {
                   (isCurrentPath(item.link) && "bg-blue-600 text-white")
                 }
                 align={"center"}
-                gap={"3"}
+                justify={"between"}
                 onClick={() => {
+                  if (item.subLinks) return;
                   router.push(item.link);
                 }}
               >
-                <Flex className="w-[20px]">{item.icon}</Flex>
-                <Text className="">{item.label}</Text>
+                <Flex gap={"3"}>
+                  <Flex className="w-[20px]">{item.icon}</Flex>
+                  <Text className="">{item.label}</Text>
+                </Flex>
+                {item.subLinks && item.subLinks?.length > 0 && (
+                  <Flex>
+                    <CaretDownIcon onClick={() => handleOpen(item.link)} />
+                  </Flex>
+                )}
               </Flex>
+              {item.isOpen &&
+                item.subLinks &&
+                item.subLinks?.length > 0 &&
+                item.subLinks.map((item) => (
+                  <Flex className="ml-10">
+                    <Flex
+                      className={
+                        "h-[40px] w-full px-5 cursor-pointer rounded-lg " +
+                        (isCurrentPath(item.link) && "bg-blue-600 text-white")
+                      }
+                      align={"center"}
+                      justify={"between"}
+                      onClick={() => {
+                        router.push(item.link);
+                      }}
+                    >
+                      <Flex gap={"3"}>
+                        <Flex className="w-[20px]">{item.icon}</Flex>
+                        <Text className="">{item.label}</Text>
+                      </Flex>
+                    </Flex>
+                  </Flex>
+                ))}
               <Flex className="border-b w-full" />
             </Flex>
           ))}
