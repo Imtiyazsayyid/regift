@@ -2,18 +2,18 @@
 
 import { Avatar, Flex, Select, Table, Text, Button } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
-import AppTable from "../components/Table";
-import * as AdminServices from "../Services/AdminServices";
+import AppTable from "../../components/Table";
+import * as AdminServices from "../../Services/AdminServices";
 import toast from "react-hot-toast";
-import TableActions from "../components/TableActions";
-import usePagination from "../hooks/usePagination";
-import Pagination from "../components/Pagination";
-import { Organisation } from "../interfaces/OrganisationInterface";
-import SearchBar from "../components/SearchBar";
-import EntriesPerPage from "../components/EntriesPerPage";
-import ApprovalStatusBadge from "../components/ApprovalStatusBadge";
-import ApprovalStatusFilter from "../components/ApprovalStatusFilter";
-import { getEmptyOrValue } from "../helpers/selectHelpers";
+import TableActions from "../../components/TableActions";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
+import { Organisation } from "../../interfaces/OrganisationInterface";
+import SearchBar from "../../components/SearchBar";
+import EntriesPerPage from "../../components/EntriesPerPage";
+import ApprovalStatusBadge from "../../components/ApprovalStatusBadge";
+import ApprovalStatusFilter from "../../components/ApprovalStatusFilter";
+import { getEmptyOrValue } from "../../helpers/selectHelpers";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { usePathname, useRouter } from "next/navigation";
 

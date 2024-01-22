@@ -10,12 +10,12 @@ import {
 } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { CldUploadWidget, CldImage } from "next-cloudinary";
-import { donatedItemSchema } from "../validationSchemas";
-import CategoryFilter from "../components/CategoryFilter";
-import * as AdminServices from "../Services/AdminServices";
+import { donatedItemSchema } from "../../validationSchemas";
+import CategoryFilter from "../../components/CategoryFilter";
+import * as AdminServices from "../../Services/AdminServices";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Category } from "../interfaces/CategoryInterface";
+import { Category } from "../../interfaces/CategoryInterface";
 
 export interface CloudinaryResult {
   url: string;

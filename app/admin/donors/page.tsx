@@ -2,15 +2,15 @@
 
 import { Avatar, Button, Flex, Select, Table, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
-import AppTable from "../components/Table";
-import * as AdminServices from "../Services/AdminServices";
+import AppTable from "../../components/Table";
+import * as AdminServices from "../../Services/AdminServices";
 import toast from "react-hot-toast";
-import TableActions from "../components/TableActions";
-import usePagination from "../hooks/usePagination";
-import Pagination from "../components/Pagination";
-import { Donor } from "../interfaces/DonorInterface";
-import SearchBar from "../components/SearchBar";
-import EntriesPerPage from "../components/EntriesPerPage";
+import TableActions from "../../components/TableActions";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
+import { Donor } from "../../interfaces/DonorInterface";
+import SearchBar from "../../components/SearchBar";
+import EntriesPerPage from "../../components/EntriesPerPage";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { usePathname, useRouter } from "next/navigation";
 

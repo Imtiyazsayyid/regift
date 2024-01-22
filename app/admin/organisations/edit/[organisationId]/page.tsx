@@ -3,7 +3,7 @@ import { Flex, Heading } from "@radix-ui/themes";
 import Form from "../../Form";
 import Seperator from "@/app/components/Seperator";
 import { useEffect, useState } from "react";
-import * as AdminServices from "../../../Services/AdminServices";
+import * as AdminServices from "../../../../Services/AdminServices";
 import { Organisation } from "@/app/interfaces/OrganisationInterface";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";

@@ -38,21 +38,7 @@ export default function RootLayout({
       <body>
         <Theme accentColor="indigo">
           <Toaster />
-          <main className={`h-screen bg-slate-100`}>
-            <Flex className="w-full h-full p-2" gap={"2"}>
-              <Flex className="min-w-[350px] bg-white border rounded-lg overflow-hidden shadow-md">
-                <VerticalNavbar />
-              </Flex>
-              <Flex className="w-full" direction={"column"} gap={"2"}>
-                <Flex className="bg-white border rounded-lg overflow-hidden shadow-sm">
-                  <HorizontalNavBar />
-                </Flex>
-                <Flex className="h-full w-full rounded-lg border overflow-hidden bg-white p-5 shadow-sm">
-                  {children}
-                </Flex>
-              </Flex>
-            </Flex>
-          </main>
+          <main className={`h-screen bg-slate-100`}>{children}</main>
         </Theme>
       </body>
     </html>

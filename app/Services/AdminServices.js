@@ -1,5 +1,9 @@
 import Api from "./Api";
 
+export async function login(payload) {
+  return await Api.post("auth/login", payload);
+}
+
 // Donor
 export async function getAllDonors(params) {
   return await Api.get("/donors", { params });

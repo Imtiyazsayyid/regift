@@ -10,8 +10,8 @@ import {
 } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { CldUploadWidget, CldImage } from "next-cloudinary";
-import { donorSchema } from "../validationSchemas";
-import * as AdminServices from "../Services/AdminServices";
+import { donorSchema } from "../../validationSchemas";
+import * as AdminServices from "../../Services/AdminServices";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 

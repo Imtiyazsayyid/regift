@@ -2,26 +2,26 @@
 
 import { Avatar, Flex, Select, Switch, Table, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
-import AppTable from "../components/Table";
-import * as AdminServices from "../Services/AdminServices";
+import AppTable from "../../components/Table";
+import * as AdminServices from "../../Services/AdminServices";
 import toast from "react-hot-toast";
-import TableActions from "../components/TableActions";
-import usePagination from "../hooks/usePagination";
-import Pagination from "../components/Pagination";
-import { DonatedItem } from "../interfaces/DonatedItemInterface";
-import SearchBar from "../components/SearchBar";
-import EntriesPerPage from "../components/EntriesPerPage";
-import ApprovalStatusBadge from "../components/ApprovalStatusBadge";
-import ApprovalStatusFilter from "../components/ApprovalStatusFilter";
-import CategoryFilter from "../components/CategoryFilter";
+import TableActions from "../../components/TableActions";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
+import { DonatedItem } from "../../interfaces/DonatedItemInterface";
+import SearchBar from "../../components/SearchBar";
+import EntriesPerPage from "../../components/EntriesPerPage";
+import ApprovalStatusBadge from "../../components/ApprovalStatusBadge";
+import ApprovalStatusFilter from "../../components/ApprovalStatusFilter";
+import CategoryFilter from "../../components/CategoryFilter";
 import {
   getEmptyOrValue,
   getEmptyOrValueForAvailability,
-} from "../helpers/selectHelpers";
-import { getConditionByKey } from "../helpers/EnumValues";
-import ConditionBadge from "../components/ConditionBadge";
-import ConditionFilter from "../components/ConditionFilter";
-import AvailablityFilter from "../components/AvailablityFilter";
+} from "../../helpers/selectHelpers";
+import { getConditionByKey } from "../../helpers/EnumValues";
+import ConditionBadge from "../../components/ConditionBadge";
+import ConditionFilter from "../../components/ConditionFilter";
+import AvailablityFilter from "../../components/AvailablityFilter";
 
 const DonatedItemsPage = () => {
   const tableTitles = [
