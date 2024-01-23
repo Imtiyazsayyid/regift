@@ -14,7 +14,7 @@ interface Props {
   };
 }
 
-const page = ({ params }: Props) => {
+const EditDonorPage = ({ params }: Props) => {
   const [donor, setDonor] = useState<Donor>();
   const router = useRouter();
 
@@ -54,4 +54,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default EditDonorPage;

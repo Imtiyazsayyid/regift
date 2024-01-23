@@ -14,7 +14,7 @@ interface Props {
   };
 }
 
-const page = ({ params }: Props) => {
+const EditDonatedItem = ({ params }: Props) => {
   const [donatedItem, setDonatedItem] = useState<DonatedItem>();
   const router = useRouter();
 
@@ -55,4 +55,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default EditDonatedItem;

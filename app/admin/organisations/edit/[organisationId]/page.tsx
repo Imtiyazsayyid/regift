@@ -14,7 +14,7 @@ interface Props {
   };
 }
 
-const page = ({ params }: Props) => {
+const EditOrganisationPage = ({ params }: Props) => {
   const [organisation, setOrganisation] = useState<Organisation>();
   const router = useRouter();
 
@@ -57,4 +57,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default EditOrganisationPage;

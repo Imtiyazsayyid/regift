@@ -4,8 +4,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import "../theme-config.css";
-import VerticalNavbar from "./VerticalNavbar";
-import HorizontalNavBar from "./HorizontalNavBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
