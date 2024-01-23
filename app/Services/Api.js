@@ -3,7 +3,8 @@ import { TokenService } from "./StorageService";
 
 export default function Api() {
   const instance = axios.create({
-    baseURL: "http://localhost:8003/api/admin",
+    baseURL: process.env.BASE_URL,
+    // baseURL: "http://localhost:8003/api/admin",
   });
 
   const ACCESS_TOKEN = TokenService.getAccessToken();

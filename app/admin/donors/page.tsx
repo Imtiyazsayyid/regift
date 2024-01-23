@@ -79,7 +79,7 @@ const DonorsPage = () => {
         justify={"between"}
         p={"4"}
       >
-        <AppTable titles={tableTitles}>
+        <AppTable titles={tableTitles} items={donors}>
           {currentDonors?.map((donor, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>

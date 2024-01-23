@@ -1,12 +1,20 @@
 import React, { ReactNode } from "react";
-import { Table } from "@radix-ui/themes";
+import { Table, Flex, Text } from "@radix-ui/themes";
 
 interface Props {
   titles: string[];
   children: ReactNode;
+  items: any[];
 }
 
-const AppTable = ({ titles, children }: Props) => {
+const AppTable = ({ titles, children, items }: Props) => {
+  if (items.length === 0)
+    return (
+      <Flex className="w-full py-20" justify={"center"}>
+        <Text className="text-sm text-slate-500">No Items Found.</Text>
+      </Flex>
+    );
+
   return (
     <Table.Root
       variant="surface"

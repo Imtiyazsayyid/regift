@@ -35,7 +35,7 @@ const ApprovalStatusFilter = ({ category, setCategory }: Props) => {
         <Select.Content position="popper">
           <Select.Item value={"all"}>All</Select.Item>
           {categories.map((category) => (
-            <Select.Item value={category.id.toString()}>
+            <Select.Item value={category.id.toString()} key={category.id}>
               {category.name}
             </Select.Item>
           ))}

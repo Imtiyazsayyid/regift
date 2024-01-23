@@ -1,6 +1,11 @@
+"use client";
+
 import { Flex, Heading, Text } from "@radix-ui/themes";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  router.push("/admin");
   return (
     <main className="h-full w-full">
       <Flex

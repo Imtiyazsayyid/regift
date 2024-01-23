@@ -98,7 +98,7 @@ const OrganisationsPage = () => {
         justify={"between"}
         p={"4"}
       >
-        <AppTable titles={tableTitles}>
+        <AppTable titles={tableTitles} items={organisations}>
           {currentOrganisations?.map((organisation, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>

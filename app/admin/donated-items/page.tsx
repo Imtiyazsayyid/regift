@@ -109,7 +109,7 @@ const DonatedItemsPage = () => {
         justify={"between"}
         p={"4"}
       >
-        <AppTable titles={tableTitles}>
+        <AppTable titles={tableTitles} items={currentDonatedItems}>
           {currentDonatedItems?.map((donatedItem, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>

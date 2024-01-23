@@ -129,7 +129,7 @@ const VerticalNavbar = () => {
                 item.subLinks &&
                 item.subLinks?.length > 0 &&
                 item.subLinks.map((item) => (
-                  <Flex className="ml-10">
+                  <Flex className="ml-10" key={item.link}>
                     <Flex
                       className={
                         "h-[40px] w-full px-5 cursor-pointer rounded-lg " +

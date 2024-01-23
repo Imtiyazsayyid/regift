@@ -249,7 +249,7 @@ const DonatedItemForm = ({
             <Select.Trigger />
             <Select.Content position="popper">
               {categories.map((category) => (
-                <Select.Item value={category.id.toString()}>
+                <Select.Item value={category.id.toString()} key={category.id}>
                   {category.name}
                 </Select.Item>
               ))}
