@@ -5,7 +5,10 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
-  router.push("/admin");
+  if (typeof window !== "undefined") {
+    router.push("/admin");
+  }
+
   return (
     <main className="h-full w-full">
       <Flex
