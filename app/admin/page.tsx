@@ -11,8 +11,7 @@ export default function Home() {
         gap={"4"}
       >
         <Heading size={"9"}>
-          Welcome To <span className="text-blue-600">ReGift</span>{" "}
-          Administrator.
+          Welcome To <span className="text-blue-600">ReGift</span> Admin.
         </Heading>
         <Text className="w-1/4 text-slate-600" align={"center"}>
           The place where you can donate freely while being assured it goes to
