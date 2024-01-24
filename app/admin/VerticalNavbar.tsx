@@ -16,6 +16,8 @@ import { useState } from "react";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FaSuitcase } from "react-icons/fa6";
 
+import { motion } from "framer-motion";
+
 const VerticalNavbar = () => {
   const [ListItems, setListItems] = useState([
     {
@@ -150,29 +152,40 @@ const VerticalNavbar = () => {
                   </Flex>
                 )}
               </Flex>
-              {item.isOpen &&
-                item.subLinks &&
-                item.subLinks?.length > 0 &&
-                item.subLinks.map((item) => (
-                  <Flex className="ml-10" key={item.link}>
-                    <Flex
-                      className={
-                        "h-[40px] w-full px-5 cursor-pointer rounded-lg " +
-                        (isCurrentPath(item.link) && "bg-blue-600 text-white")
-                      }
-                      align={"center"}
-                      justify={"between"}
-                      onClick={() => {
-                        router.push(item.link);
-                      }}
-                    >
-                      <Flex gap={"3"}>
-                        <Flex className="w-[20px]">{item.icon}</Flex>
-                        <Text className="">{item.label}</Text>
+
+              <motion.div
+                className="overflow-hidden"
+                animate={
+                  item.isOpen ? { height: "fit-content" } : { height: 0 }
+                }
+              >
+                <Flex direction={"column"} className="mb-5">
+                  {item.subLinks &&
+                    item.subLinks?.length > 0 &&
+                    item.subLinks.map((item) => (
+                      <Flex className="ml-10" key={item.link}>
+                        <Flex
+                          className={
+                            "h-[40px] w-full px-5 cursor-pointer rounded-lg " +
+                            (isCurrentPath(item.link) &&
+                              "bg-blue-600 text-white")
+                          }
+                          align={"center"}
+                          justify={"between"}
+                          onClick={() => {
+                            router.push(item.link);
+                          }}
+                        >
+                          <Flex gap={"3"}>
+                            <Flex className="w-[20px]">{item.icon}</Flex>
+                            <Text className="">{item.label}</Text>
+                          </Flex>
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  </Flex>
-                ))}
+                    ))}
+                </Flex>
+              </motion.div>
+
               <Flex className="border-b w-full" />
             </Flex>
           ))}

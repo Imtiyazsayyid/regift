@@ -30,7 +30,7 @@ const HorizontalNavBar = () => {
 
   return (
     <Flex
-      className="h-[80px] w-full"
+      className="min-h-[80px] w-full"
       px={"5"}
       align={"center"}
       justify={"between"}
