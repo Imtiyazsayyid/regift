@@ -1,13 +1,22 @@
 import React, { ReactNode } from "react";
 import { Table, Flex, Text } from "@radix-ui/themes";
+import Loader from "./Loader";
 
 interface Props {
   titles: string[];
   children: ReactNode;
+  isLoading: boolean;
   items: any[];
 }
 
-const AppTable = ({ titles, children, items }: Props) => {
+const AppTable = ({ titles, children, items, isLoading }: Props) => {
+  if (isLoading) {
+    return (
+      <Flex className="w-full h-2/3" justify={"center"} align={"center"}>
+        <Loader isLoading={isLoading} />
+      </Flex>
+    );
+  }
   if (items.length === 0)
     return (
       <Flex className="w-full py-20" justify={"center"}>

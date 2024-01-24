@@ -7,7 +7,7 @@ const Loader = ({ isLoading }: { isLoading: boolean }) => {
   return (
     <Flex className="h-full w-full" justify={"center"} align={"center"}>
       <ScaleLoader
-        color={"var(--violet-a11)"}
+        color={"var(--blue-a11)"}
         loading={isLoading}
         aria-label="Loading Spinner"
         data-testid="loader"

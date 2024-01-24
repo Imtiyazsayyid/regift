@@ -37,6 +37,9 @@ const DonatedItemsPage = () => {
   const [donatedItems, setDonatedItems] = useState<DonatedItem[]>([]);
   const [entriesPerPage, setEntriesPerPage] = useState(7);
 
+  // loader
+  const [isLoading, setLoading] = useState(true);
+
   // filters
   const [searchText, setSearchText] = useState("");
   const [approvalStatus, setApprovalStatus] = useState("all");
@@ -45,6 +48,8 @@ const DonatedItemsPage = () => {
   const [availability, setAvailability] = useState("available");
 
   const getAllDonatedItems = async () => {
+    setLoading(true);
+
     try {
       const res = await AdminServices.getAllDonatedItems({
         searchText,
@@ -60,6 +65,7 @@ const DonatedItemsPage = () => {
       console.log(error);
       toast.error("Failed To Fetch DonatedItems");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -109,7 +115,11 @@ const DonatedItemsPage = () => {
         justify={"between"}
         p={"4"}
       >
-        <AppTable titles={tableTitles} items={currentDonatedItems}>
+        <AppTable
+          titles={tableTitles}
+          items={currentDonatedItems}
+          isLoading={isLoading}
+        >
           {currentDonatedItems?.map((donatedItem, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>

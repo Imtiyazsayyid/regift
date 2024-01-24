@@ -32,11 +32,15 @@ const OrganisationsPage = () => {
   const router = useRouter();
   const currentPath = usePathname();
 
+  // loader
+  const [isLoading, setLoading] = useState(true);
+
   // filters
   const [searchText, setSearchText] = useState("");
   const [approvalStatus, setApprovalStatus] = useState("all");
 
   const getAllOrganisations = async () => {
+    setLoading(true);
     try {
       const res = await AdminServices.getAllOrganisations({
         searchText,
@@ -49,6 +53,7 @@ const OrganisationsPage = () => {
       console.log(error);
       toast.error("Failed To Fetch Organisations");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -98,7 +103,11 @@ const OrganisationsPage = () => {
         justify={"between"}
         p={"4"}
       >
-        <AppTable titles={tableTitles} items={organisations}>
+        <AppTable
+          titles={tableTitles}
+          items={organisations}
+          isLoading={isLoading}
+        >
           {currentOrganisations?.map((organisation, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>

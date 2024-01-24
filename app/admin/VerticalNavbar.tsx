@@ -9,9 +9,12 @@ import { AiFillHome } from "react-icons/ai";
 import { FaBoxOpen, FaDonate } from "react-icons/fa";
 import { FaCartShopping, FaUserLarge } from "react-icons/fa6";
 import { RiLayout2Fill } from "react-icons/ri";
+import { FaHandHoldingHeart } from "react-icons/fa";
 import { FaGift } from "react-icons/fa6";
 import { BiSolidCategory } from "react-icons/bi";
 import { useState } from "react";
+import { FaMoneyCheckAlt } from "react-icons/fa";
+import { FaSuitcase } from "react-icons/fa6";
 
 const VerticalNavbar = () => {
   const [ListItems, setListItems] = useState([
@@ -35,28 +38,50 @@ const VerticalNavbar = () => {
       ],
     },
     {
-      link: "/admin/donors",
-      isOpen: false,
+      link: "/admin/users",
       icon: <FaUserLarge className="text-xl" />,
-      label: "Donors",
+      isOpen: false,
+      label: "Users",
+      subLinks: [
+        {
+          link: "/admin/donors",
+          isOpen: false,
+          icon: <FaHandHoldingHeart className="text-xl" />,
+          label: "Donors",
+        },
+        {
+          link: "/admin/organisations",
+          isOpen: false,
+          icon: <FaDonate className="text-xl" />,
+          label: "Charitable Organisations",
+        },
+      ],
     },
     {
-      link: "/admin/organisations",
+      link: "/admin/operations",
       isOpen: false,
-      icon: <FaDonate className="text-2xl" />,
-      label: "Charitable Organisations",
-    },
-    {
-      link: "/admin/donated-items",
-      isOpen: false,
-      icon: <FaBoxOpen className="text-2xl" />,
-      label: "Donated Items",
-    },
-    {
-      link: "/admin/orders",
-      isOpen: false,
-      icon: <FaCartShopping className="text-2xl" />,
-      label: "Orders",
+      icon: <FaSuitcase className="text-2xl" />,
+      label: "Operations",
+      subLinks: [
+        {
+          link: "/admin/donated-items",
+          isOpen: false,
+          icon: <FaBoxOpen className="text-2xl" />,
+          label: "Donated Items",
+        },
+        {
+          link: "/admin/orders",
+          isOpen: false,
+          icon: <FaCartShopping className="text-2xl" />,
+          label: "Orders",
+        },
+        {
+          link: "/admin/transactions",
+          isOpen: false,
+          icon: <FaMoneyCheckAlt className="text-2xl" />,
+          label: "Transactions",
+        },
+      ],
     },
   ]);
 

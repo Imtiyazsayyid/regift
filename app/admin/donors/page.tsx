@@ -21,10 +21,14 @@ const DonorsPage = () => {
   const router = useRouter();
   const currentPath = usePathname();
 
+  // loader
+  const [isLoading, setLoading] = useState(true);
+
   // filters
   const [searchText, setSearchText] = useState("");
 
   const getAllDonors = async () => {
+    setLoading(true);
     try {
       const res = await AdminServices.getAllDonors({ searchText });
       if (res.status) {
@@ -34,6 +38,7 @@ const DonorsPage = () => {
       console.log(error);
       toast.error("Failed To Fetch Donors");
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -79,7 +84,7 @@ const DonorsPage = () => {
         justify={"between"}
         p={"4"}
       >
-        <AppTable titles={tableTitles} items={donors}>
+        <AppTable titles={tableTitles} items={donors} isLoading={isLoading}>
           {currentDonors?.map((donor, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>
