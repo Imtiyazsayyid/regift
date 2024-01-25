@@ -18,8 +18,13 @@ import { FaSuitcase } from "react-icons/fa6";
 
 import { motion } from "framer-motion";
 
-const VerticalNavbar = () => {
-  const [isActive, setActive] = useState(false);
+interface Props {
+  isActive: boolean;
+  setActive: (isActive: boolean) => void;
+}
+
+const VerticalNavbar = ({ isActive, setActive }: Props) => {
+  // const [isActive, setActive] = useState(false);
   const [ListItems, setListItems] = useState([
     {
       link: "/admin",
