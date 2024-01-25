@@ -8,11 +8,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Flex className="w-full h-full p-2" gap={"2"}>
-      <Flex className="min-w-[350px] bg-white border rounded-lg overflow-hidden shadow-md">
+    <Flex className="w-full h-full" gap={"2"}>
+      {/*  className="min-w-[350px] bg-white border rounded-e-lg overflow-hidden shadow-md fixed h-full" */}
+      <Flex>
         <VerticalNavbar />
       </Flex>
-      <Flex className="w-full" direction={"column"} gap={"2"}>
+      <Flex className="w-full p-2" direction={"column"} gap={"2"}>
         <Flex className="bg-white border rounded-lg overflow-hidden shadow-sm">
           <HorizontalNavBar />
         </Flex>
