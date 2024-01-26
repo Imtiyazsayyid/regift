@@ -10,16 +10,18 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   params: {
-    donatedItemId: string;
+    inventoryItemId: string;
   };
 }
 
-const EditDonatedItem = ({ params }: Props) => {
+const EditInventoryItem = ({ params }: Props) => {
   const [donatedItem, setDonatedItem] = useState<DonatedItem>();
   const router = useRouter();
 
   const getSingleDonatedItem = async () => {
-    const res = await AdminServices.getSingleDonatedItem(params.donatedItemId);
+    const res = await AdminServices.getSingleDonatedItem(
+      params.inventoryItemId
+    );
     if (!res.status) {
       toast.error("Could Not Get Donated Item.");
       router.back();
@@ -44,8 +46,8 @@ const EditDonatedItem = ({ params }: Props) => {
         id={donatedItem?.id}
         title={donatedItem?.title}
         image={donatedItem?.image}
-        description={donatedItem?.description || ""}
         isPickedUp={donatedItem?.isPickedUp}
+        description={donatedItem?.description || ""}
         categoryId={donatedItem?.categoryId}
         approvalStatus={donatedItem?.approvalStatus || ""}
         condition={donatedItem?.condition}
@@ -55,4 +57,4 @@ const EditDonatedItem = ({ params }: Props) => {
   );
 };
 
-export default EditDonatedItem;
+export default EditInventoryItem;

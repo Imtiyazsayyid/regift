@@ -38,10 +38,10 @@ interface Props {
 const DonatedItemForm = ({
   id,
   title,
+  isPickedUp,
   image,
   categoryId,
   description,
-  isPickedUp,
   condition,
   approvalStatus,
   donorId,
@@ -60,9 +60,9 @@ const DonatedItemForm = ({
 
   const [donatedItemDetails, setDonatedItemDetails] = useState({
     id: null as number | undefined | null,
+    isPickedUp: false,
     title: "",
     condition: "",
-    isPickedUp: false,
     approvalStatus: "",
     categoryId: null as number | null,
     image: "",
@@ -74,12 +74,13 @@ const DonatedItemForm = ({
     setDonatedItemDetails({
       id: id,
       title: title || "",
-      isPickedUp: isPickedUp || false,
       image: image || "",
+      isPickedUp: isPickedUp || false,
       condition: condition || "",
       approvalStatus: approvalStatus || "",
       categoryId: categoryId || null,
       donorId: donorId || null,
+
       description: description || "",
     });
 
@@ -88,11 +89,11 @@ const DonatedItemForm = ({
     id,
     title,
     image,
+    isPickedUp,
     description,
     donorId,
     condition,
     approvalStatus,
-    isPickedUp,
     categoryId,
   ]);
 

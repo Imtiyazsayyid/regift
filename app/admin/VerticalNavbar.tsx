@@ -15,6 +15,7 @@ import { BiSolidCategory } from "react-icons/bi";
 import { useState } from "react";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FaSuitcase } from "react-icons/fa6";
+import { MdOutlineInventory } from "react-icons/md";
 
 import { motion } from "framer-motion";
 
@@ -76,6 +77,12 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
           isOpen: false,
           icon: <FaBoxOpen className="text-2xl" />,
           label: "Donated Items",
+        },
+        {
+          link: "/admin/inventory",
+          isOpen: false,
+          icon: <MdOutlineInventory className="text-2xl" />,
+          label: "Inventory",
         },
         {
           link: "/admin/orders",

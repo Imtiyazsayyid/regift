@@ -1,29 +1,22 @@
 "use client";
 
-import { Avatar, Flex, Select, Switch, Table, Text } from "@radix-ui/themes";
-import React, { useEffect, useState } from "react";
-import AppTable from "../../components/Table";
-import * as AdminServices from "../../Services/AdminServices";
+import { Avatar, Flex, Table } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import TableActions from "../../components/TableActions";
-import usePagination from "../../hooks/usePagination";
-import Pagination from "../../components/Pagination";
-import { DonatedItem } from "../../interfaces/DonatedItemInterface";
-import SearchBar from "../../components/SearchBar";
-import EntriesPerPage from "../../components/EntriesPerPage";
-import ApprovalStatusBadge from "../../components/ApprovalStatusBadge";
-import ApprovalStatusFilter from "../../components/ApprovalStatusFilter";
+import * as AdminServices from "../../Services/AdminServices";
 import CategoryFilter from "../../components/CategoryFilter";
-import {
-  getEmptyOrValue,
-  getEmptyOrValueForAvailability,
-} from "../../helpers/selectHelpers";
-import { getConditionByKey } from "../../helpers/EnumValues";
 import ConditionBadge from "../../components/ConditionBadge";
 import ConditionFilter from "../../components/ConditionFilter";
-import AvailablityFilter from "../../components/AvailablityFilter";
+import EntriesPerPage from "../../components/EntriesPerPage";
+import Pagination from "../../components/Pagination";
+import SearchBar from "../../components/SearchBar";
+import AppTable from "../../components/Table";
+import TableActions from "../../components/TableActions";
+import { getEmptyOrValue } from "../../helpers/selectHelpers";
+import usePagination from "../../hooks/usePagination";
+import { DonatedItem } from "../../interfaces/DonatedItemInterface";
 
-const DonatedItemsPage = () => {
+const InventoryPage = () => {
   const tableTitles = [
     "#",
     "Image",
@@ -31,10 +24,9 @@ const DonatedItemsPage = () => {
     "Category",
     "Condition",
     "Donated By",
-    "Approval Status",
     "Actions",
   ];
-  const [donatedItems, setDonatedItems] = useState<DonatedItem[]>([]);
+  const [inventory, setInventory] = useState<DonatedItem[]>([]);
   const [entriesPerPage, setEntriesPerPage] = useState(7);
 
   // loader
@@ -42,24 +34,23 @@ const DonatedItemsPage = () => {
 
   // filters
   const [searchText, setSearchText] = useState("");
-  const [approvalStatus, setApprovalStatus] = useState("all");
   const [category, setCategory] = useState("all");
   const [condition, setCondition] = useState("all");
-  const [availability, setAvailability] = useState("available");
 
-  const getAllDonatedItems = async () => {
+  const getInventory = async () => {
     setLoading(true);
 
     try {
       const res = await AdminServices.getAllDonatedItems({
         searchText,
-        approvalStatus: getEmptyOrValue(approvalStatus),
+        approvalStatus: "approved",
         categoryId: getEmptyOrValue(category),
         condition: getEmptyOrValue(condition),
-        availability: getEmptyOrValueForAvailability(availability),
+        availability: true,
+        isPickedUp: true,
       });
       if (res.status) {
-        setDonatedItems(res.data.data);
+        setInventory(res.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -69,15 +60,15 @@ const DonatedItemsPage = () => {
   };
 
   useEffect(() => {
-    getAllDonatedItems();
-  }, [searchText, approvalStatus, category, condition, availability]);
+    getInventory();
+  }, [searchText, category, condition]);
 
   const {
     currentPage,
-    currentItems: currentDonatedItems,
+    currentItems: currentInventory,
     setCurrentPage,
     totalPages,
-  } = usePagination(donatedItems, entriesPerPage);
+  } = usePagination(inventory, entriesPerPage);
 
   return (
     <Flex className="w-full" direction={"column"} gap={"2"}>
@@ -90,19 +81,11 @@ const DonatedItemsPage = () => {
         <SearchBar
           searchText={searchText}
           setSearchText={setSearchText}
-          placeholder="Find donated items"
+          placeholder="Find Inventory items"
         />
         <Flex gap={"2"}>
-          <AvailablityFilter
-            setAvailability={setAvailability}
-            availability={availability}
-          />
           <ConditionFilter condition={condition} setCondition={setCondition} />
           <CategoryFilter category={category} setCategory={setCategory} />
-          <ApprovalStatusFilter
-            approvalStatus={approvalStatus}
-            setApprovalStatus={setApprovalStatus}
-          />
           <EntriesPerPage
             entriesPerPage={entriesPerPage}
             setEntriesPerPage={setEntriesPerPage}
@@ -117,10 +100,10 @@ const DonatedItemsPage = () => {
       >
         <AppTable
           titles={tableTitles}
-          items={currentDonatedItems}
+          items={currentInventory}
           isLoading={isLoading}
         >
-          {currentDonatedItems?.map((donatedItem, index) => (
+          {currentInventory?.map((inventoryItem, index) => (
             <Table.Row align={"center"} key={index}>
               <Table.Cell>
                 {index + 1 + currentPage * entriesPerPage}
@@ -129,29 +112,26 @@ const DonatedItemsPage = () => {
                 <Avatar
                   size={"2"}
                   fallback={"?"}
-                  src={donatedItem.image || ""}
+                  src={inventoryItem.image || ""}
                 />
               </Table.Cell>
-              <Table.Cell>{donatedItem.title}</Table.Cell>
-              <Table.Cell>{donatedItem.category.name}</Table.Cell>
+              <Table.Cell>{inventoryItem.title}</Table.Cell>
+              <Table.Cell>{inventoryItem.category.name}</Table.Cell>
               <Table.Cell>
-                <ConditionBadge condition={donatedItem.condition} />
+                <ConditionBadge condition={inventoryItem.condition} />
               </Table.Cell>
               <Table.Cell>
-                {donatedItem.donor.firstName} {donatedItem.donor.lastName}
-              </Table.Cell>
-              <Table.Cell>
-                <ApprovalStatusBadge status={donatedItem.approvalStatus} />
+                {inventoryItem.donor.firstName} {inventoryItem.donor.lastName}
               </Table.Cell>
 
               <Table.Cell>
                 <TableActions
-                  id={donatedItem.id}
-                  removedItem={`donatedItem "${donatedItem.title}"`}
+                  id={inventoryItem.id}
+                  removedItem={`donatedItem "${inventoryItem.title}"`}
                   deleteFunction={() =>
-                    AdminServices.deleteDonatedItem(donatedItem.id)
+                    AdminServices.deleteDonatedItem(inventoryItem.id)
                   }
-                  fetchData={getAllDonatedItems}
+                  fetchData={getInventory}
                 />
               </Table.Cell>
             </Table.Row>
@@ -169,4 +149,4 @@ const DonatedItemsPage = () => {
   );
 };
 
-export default DonatedItemsPage;
+export default InventoryPage;

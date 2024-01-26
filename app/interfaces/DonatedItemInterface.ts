@@ -6,11 +6,13 @@ export type DonatedItem = {
   title: string;
   image: string;
   description: string | null;
-  quantity: number;
   condition: "new" | "like_new" | "used_good" | "used_fair" | "used_poor";
   pickupAddress: string | null;
-  isPickupAvailable: boolean;
+
   approvalStatus: "pending" | "approved" | "rejected";
+
+  isAvailable: boolean;
+  isPickedUp: boolean;
 
   donorId: number;
   donor: Donor;
