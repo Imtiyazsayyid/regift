@@ -133,7 +133,7 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
       {!isActive && (
         <Tooltip content="Open Navigation Menu">
           <Flex
-            className="h-24 w-8 border absolute top-[46%] bg-blue-500 rounded-e-lg cursor-pointer shadow-2xl text-white text-xs"
+            className="h-24 w-8 border absolute top-[46%] bg-black rounded-e-lg cursor-pointer shadow-2xl text-white text-xs opacity-50"
             direction={"column"}
             onClick={() => setActive(true)}
             align={"center"}
