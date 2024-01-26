@@ -1,7 +1,12 @@
 "use client";
 
-import { CaretDownIcon, CaretUpIcon, Cross2Icon } from "@radix-ui/react-icons";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import {
+  CaretDownIcon,
+  CaretUpIcon,
+  Cross2Icon,
+  DoubleArrowLeftIcon,
+} from "@radix-ui/react-icons";
+import { Flex, Heading, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
 import { usePathname } from "next/navigation";
@@ -126,10 +131,17 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
   return (
     <Flex className="z-50">
       {!isActive && (
-        <Flex
-          className="h-10 w-10 border absolute top-8 bg-blue-700 rounded-e-lg cursor-pointer"
-          onClick={() => setActive(true)}
-        ></Flex>
+        <Tooltip content="Open Navigation Menu">
+          <Flex
+            className="h-24 w-8 border absolute top-[46%] bg-blue-500 rounded-e-lg cursor-pointer shadow-2xl text-white text-xs"
+            direction={"column"}
+            onClick={() => setActive(true)}
+            align={"center"}
+            justify={"center"}
+          >
+            <DoubleArrowLeftIcon />
+          </Flex>
+        </Tooltip>
       )}
       <motion.div
         className="bg-white overflow-hidden fixed border rounded-e-xl h-full shadow-2xl"
@@ -140,7 +152,7 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
             className="absolute top-8 right-5 cursor-pointer"
             onClick={() => setActive(false)}
           >
-            <Cross2Icon className="h-10 w-10" />
+            <Cross2Icon className="h-5 w-5" />
           </Flex>
           <Flex className="w-full rounded-lg" direction={"column"}>
             <Flex className="h-[100px] w-full p-5">
