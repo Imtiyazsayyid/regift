@@ -70,6 +70,7 @@ const DonatedItemsPage = () => {
 
   useEffect(() => {
     getAllDonatedItems();
+    setCurrentPage(0);
   }, [searchText, approvalStatus, category, condition, availability]);
 
   const {

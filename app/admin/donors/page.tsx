@@ -43,6 +43,7 @@ const DonorsPage = () => {
 
   useEffect(() => {
     getAllDonors();
+    setCurrentPage(0);
   }, [searchText]);
 
   const {

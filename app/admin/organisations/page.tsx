@@ -58,6 +58,7 @@ const OrganisationsPage = () => {
 
   useEffect(() => {
     getAllOrganisations();
+    setCurrentPage(0);
   }, [searchText, approvalStatus]);
 
   const {

@@ -61,6 +61,7 @@ const InventoryPage = () => {
 
   useEffect(() => {
     getInventory();
+    setCurrentPage(0);
   }, [searchText, category, condition]);
 
   const {
