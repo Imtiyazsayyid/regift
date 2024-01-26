@@ -268,6 +268,7 @@ const DonatedItemForm = ({
           <Text className="text-xs text-slate-400">Approval Status</Text>
           <Text className="text-xs text-red-400">{errors.title}</Text>
           <Select.Root
+            disabled={donatedItemDetails.isPickedUp}
             value={donatedItemDetails.approvalStatus}
             onValueChange={(val) =>
               setDonatedItemDetails({
@@ -285,15 +286,21 @@ const DonatedItemForm = ({
           </Select.Root>
         </Flex>
 
-        <Flex className="w-1/6" gap={"2"} align={"center"} justify={"center"}>
+        <Flex className="w-1/6" gap={"2"} align={"center"} justify={"end"}>
           <Switch
-            checked={donatedItemDetails.isPickedUp}
-            onCheckedChange={(val) =>
-              setDonatedItemDetails({
-                ...donatedItemDetails,
-                isPickedUp: val,
-              })
+            checked={
+              donatedItemDetails.approvalStatus === "approved"
+                ? donatedItemDetails.isPickedUp
+                : false
             }
+            onCheckedChange={(val) => {
+              donatedItemDetails.approvalStatus === "approved"
+                ? setDonatedItemDetails({
+                    ...donatedItemDetails,
+                    isPickedUp: val,
+                  })
+                : toast.error("Item is not approved.");
+            }}
           />{" "}
           Picked Up
         </Flex>
