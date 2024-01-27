@@ -32,8 +32,6 @@ const CategoriesPage = () => {
       const res = await AdminServices.getAllCategories({ searchText });
       if (res.status) {
         setCategories(res.data.data);
-      } else {
-        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -55,26 +53,11 @@ const CategoriesPage = () => {
 
   return (
     <Flex className="w-full" direction={"column"} gap={"2"}>
-      <Flex
-        className="min-h-20 border rounded-lg shadow-sm"
-        p={"4"}
-        align={"center"}
-        justify={"between"}
-      >
-        <SearchBar
-          searchText={searchText}
-          setSearchText={setSearchText}
-          placeholder="Find a Category"
-        />
+      <Flex className="min-h-20 border rounded-lg shadow-sm" p={"4"} align={"center"} justify={"between"}>
+        <SearchBar searchText={searchText} setSearchText={setSearchText} placeholder="Find a Category" />
         <Flex align={"end"} gap={"2"}>
-          <EntriesPerPage
-            entriesPerPage={entriesPerPage}
-            setEntriesPerPage={(val) => setEntriesPerPage(val)}
-          />
-          <Button
-            variant="surface"
-            onClick={() => router.push(currentPath + "/new")}
-          >
+          <EntriesPerPage entriesPerPage={entriesPerPage} setEntriesPerPage={(val) => setEntriesPerPage(val)} />
+          <Button variant="surface" onClick={() => router.push(currentPath + "/new")}>
             <PlusIcon /> Add New
           </Button>
         </Flex>
@@ -88,9 +71,7 @@ const CategoriesPage = () => {
         <AppTable titles={tableTitles} items={categories} isLoading={isLoading}>
           {currentCategories?.map((categories, index) => (
             <Table.Row align={"center"} key={index}>
-              <Table.Cell>
-                {index + 1 + currentPage * entriesPerPage}
-              </Table.Cell>
+              <Table.Cell>{index + 1 + currentPage * entriesPerPage}</Table.Cell>
               {/* <Table.Cell>
                 <Avatar
                   size={"2"}
@@ -99,9 +80,7 @@ const CategoriesPage = () => {
                   src={categories.profileImg || ""}
                 />
               </Table.Cell> */}
-              <Table.Cell>
-                {categories.name} 
-              </Table.Cell>
+              <Table.Cell>{categories.name}</Table.Cell>
               {/* <Table.Cell>{categories.key}</Table.Cell> */}
 
               <Table.Cell>
@@ -116,11 +95,7 @@ const CategoriesPage = () => {
           ))}
         </AppTable>
         {totalPages > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalPages={totalPages}
-          />
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
         )}
       </Flex>
     </Flex>

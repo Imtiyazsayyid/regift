@@ -11,7 +11,7 @@ const DeleteConfirmation = ({ confirmDelete, removedItem }: Props) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <Button color="red" variant="soft" radius="full">
+        <Button color="ruby" variant="soft" radius="full">
           <TrashIcon />
         </Button>
       </AlertDialog.Trigger>
@@ -29,7 +29,7 @@ const DeleteConfirmation = ({ confirmDelete, removedItem }: Props) => {
             </Button>
           </AlertDialog.Cancel>
           <AlertDialog.Action>
-            <Button variant="solid" color="red" onClick={confirmDelete}>
+            <Button variant="solid" color="ruby" onClick={confirmDelete}>
               Delete
             </Button>
           </AlertDialog.Action>

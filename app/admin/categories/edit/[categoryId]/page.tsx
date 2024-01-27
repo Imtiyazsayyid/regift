@@ -19,7 +19,7 @@ const EditCategoryPage = ({ params }: Props) => {
   const router = useRouter();
 
   const getSingleCategory = async () => {
-    const res = await AdminServices.getSingleDonor(params.categoryId);
+    const res = await AdminServices.getSingleCategory(params.categoryId);
     if (!res.status) {
       toast.error("Could Not Get Category.");
       router.back();
@@ -32,22 +32,17 @@ const EditCategoryPage = ({ params }: Props) => {
   }, []);
 
   return (
-    <Flex
-      className="w-full p-10 overflow-hidden overflow-y-auto"
-      direction={"column"}
-      gap={"5"}
-      align={"center"}
-    >
+    <Flex className="w-full p-10 overflow-hidden overflow-y-auto" direction={"column"} gap={"5"} align={"center"}>
       <Heading align={"center"}>Edit Category</Heading>
       <Seperator />
       <Form
         id={category?.id}
         name={category?.name}
-        key={category?.key || ""}
+        categoryKey={category?.key}
         description={category?.description || ""}
       />
     </Flex>
   );
-}
+};
 
 export default EditCategoryPage;

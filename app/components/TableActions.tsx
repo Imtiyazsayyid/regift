@@ -1,11 +1,6 @@
 "use client";
 import DeleteConfirmation from "@/app/components/DeleteConfirmation";
-import {
-  ArrowRightIcon,
-  EyeOpenIcon,
-  Pencil2Icon,
-  TrashIcon,
-} from "@radix-ui/react-icons";
+import { ArrowRightIcon, EyeOpenIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Button, Flex } from "@radix-ui/themes";
 import axios, { Axios, AxiosResponse } from "axios";
 import { usePathname, useRouter } from "next/navigation";
@@ -20,13 +15,7 @@ interface Props {
   fetchData: () => {};
 }
 
-const TableActions = ({
-  id,
-  deleteFunction,
-  removedItem,
-  fetchData,
-  editModal,
-}: Props) => {
+const TableActions = ({ id, deleteFunction, removedItem, fetchData, editModal }: Props) => {
   const router = useRouter();
   const currentPath = usePathname();
 
@@ -34,10 +23,12 @@ const TableActions = ({
     try {
       if (deleteFunction) {
         const res = await deleteFunction();
+
         if (!res.data.status) {
-          toast.error(res.data.error);
+          toast.error(res.data.message);
+        } else {
+          toast.success("Deleted Successfully");
         }
-        toast.success("Deleted Successfully");
 
         fetchData();
       }
@@ -47,38 +38,19 @@ const TableActions = ({
   };
 
   return (
-    <Flex
-      gap={"2"}
-      className="shadow-sm w-fit p-2 rounded-full border"
-      justify={"center"}
-    >
+    <Flex gap={"2"} className="shadow-sm w-fit p-2 rounded-full border" justify={"center"}>
       {id && (
-        <Button
-          variant="soft"
-          color="blue"
-          onClick={() => router.push(currentPath + "/view/" + id)}
-          radius="full"
-        >
+        <Button variant="soft" color="blue" onClick={() => router.push(currentPath + "/view/" + id)} radius="full">
           <EyeOpenIcon />
         </Button>
       )}
       {id && (
-        <Button
-          variant="soft"
-          color="violet"
-          onClick={() => router.push(currentPath + "/edit/" + id)}
-          radius="full"
-        >
+        <Button variant="soft" color="violet" onClick={() => router.push(currentPath + "/edit/" + id)} radius="full">
           <Pencil2Icon />
         </Button>
       )}
       {editModal}
-      {deleteFunction && (
-        <DeleteConfirmation
-          confirmDelete={handleDelete}
-          removedItem={removedItem}
-        />
-      )}
+      {deleteFunction && <DeleteConfirmation confirmDelete={handleDelete} removedItem={removedItem} />}
     </Flex>
   );
 };

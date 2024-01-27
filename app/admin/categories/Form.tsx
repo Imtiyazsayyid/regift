@@ -1,13 +1,5 @@
 "use client";
-import {
-  Avatar,
-  Button,
-  Flex,
-  Select,
-  Text,
-  TextArea,
-  TextField,
-} from "@radix-ui/themes";
+import { Avatar, Button, Flex, Select, Text, TextArea, TextField } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { CldUploadWidget, CldImage } from "next-cloudinary";
 import { categorySchema } from "../../validationSchemas";
@@ -24,22 +16,12 @@ export interface CloudinaryResult {
 interface Props {
   id?: number;
   name?: string;
-  key?: string;
+  categoryKey?: string;
   description?: string;
 }
 
-const CategoryForm = ({ id, name, key, description }: Props) => {
+const CategoryForm = ({ id, name, categoryKey: key, description }: Props) => {
   const router = useRouter();
-  // const [categories, setCategories] = useState<Category[]>([]);
-
-  // const getAllCategories = async () => {
-  //   const res = await AdminServices.getAllCategories();
-  //   if (!res.status) {
-  //     toast.error("Could Not Get Categories");
-  //     return;
-  //   }
-  //   setCategories(res.data.data);
-  // };
 
   const [categoryDetails, setCategoryDetails] = useState({
     id: null as number | undefined | null,
