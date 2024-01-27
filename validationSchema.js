@@ -55,7 +55,6 @@ const donatedItemSchema = z.object({
     .string({ required_error: "Title is required" })
     .min(2, "Title is too short")
     .max(100, "Title is too long"),
-  quantity: z.number({ required_error: "Quantity is required" }),
   condition: z
     .string({ required_error: "Condition is required" })
     .refine((data) => allowedCondtions.includes(data), {

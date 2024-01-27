@@ -35,7 +35,7 @@ const HorizontalNavBar = () => {
       align={"center"}
       justify={"between"}
     >
-      <Flex>
+      <Flex className="pl-3">
         <GoBack />
       </Flex>
       <Flex gap={"3"} align={"center"} className="">

@@ -1,7 +1,12 @@
 "use client";
 
-import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import {
+  CaretDownIcon,
+  CaretUpIcon,
+  Cross2Icon,
+  DoubleArrowLeftIcon,
+} from "@radix-ui/react-icons";
+import { Flex, Heading, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
 import { usePathname } from "next/navigation";
@@ -15,10 +20,17 @@ import { BiSolidCategory } from "react-icons/bi";
 import { useState } from "react";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FaSuitcase } from "react-icons/fa6";
+import { MdOutlineInventory } from "react-icons/md";
 
 import { motion } from "framer-motion";
 
-const VerticalNavbar = () => {
+interface Props {
+  isActive: boolean;
+  setActive: (isActive: boolean) => void;
+}
+
+const VerticalNavbar = ({ isActive, setActive }: Props) => {
+  // const [isActive, setActive] = useState(false);
   const [ListItems, setListItems] = useState([
     {
       link: "/admin",
@@ -72,6 +84,12 @@ const VerticalNavbar = () => {
           label: "Donated Items",
         },
         {
+          link: "/admin/inventory",
+          isOpen: false,
+          icon: <MdOutlineInventory className="text-2xl" />,
+          label: "Inventory",
+        },
+        {
           link: "/admin/orders",
           isOpen: false,
           icon: <FaCartShopping className="text-2xl" />,
@@ -111,86 +129,117 @@ const VerticalNavbar = () => {
   };
 
   return (
-    <Flex className="w-full" p={"2"}>
-      <Flex className="w-full rounded-lg" direction={"column"}>
-        <Flex className="h-[100px] w-full p-5">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Avicii_-_Logo.png"
-            className="h-full w-fit object-cover"
-          />
-        </Flex>
-        <Flex className="p-4 pb-8 border-b">
-          <Heading>
-            <span className="text-blue-600">ReGift</span> Admin
-          </Heading>
-        </Flex>
-        <Flex py={"1"} gap={"1"} direction={"column"}>
-          {ListItems.map((item) => (
-            <Flex key={item.link} direction={"column"} gap={"1"}>
-              <Flex
-                className={
-                  "h-[60px] w-full px-5 cursor-pointer rounded-lg " +
-                  (isCurrentPath(item.link) && "bg-blue-600 text-white")
-                }
-                align={"center"}
-                justify={"between"}
-                onClick={() => {
-                  if (item.subLinks) {
-                    handleOpen(item.link);
-                    return;
-                  }
-                  router.push(item.link);
-                }}
-              >
-                <Flex gap={"3"}>
-                  <Flex className="w-[20px]">{item.icon}</Flex>
-                  <Text className="">{item.label}</Text>
-                </Flex>
-                {item.subLinks && item.subLinks?.length > 0 && (
-                  <Flex>
-                    {!item.isOpen ? <CaretDownIcon /> : <CaretUpIcon />}
-                  </Flex>
-                )}
-              </Flex>
-
-              <motion.div
-                className="overflow-hidden"
-                animate={
-                  item.isOpen ? { height: "fit-content" } : { height: 0 }
-                }
-              >
-                <Flex direction={"column"} className="mb-5">
-                  {item.subLinks &&
-                    item.subLinks?.length > 0 &&
-                    item.subLinks.map((item) => (
-                      <Flex className="ml-10" key={item.link}>
-                        <Flex
-                          className={
-                            "h-[40px] w-full px-5 cursor-pointer rounded-lg " +
-                            (isCurrentPath(item.link) &&
-                              "bg-blue-600 text-white")
-                          }
-                          align={"center"}
-                          justify={"between"}
-                          onClick={() => {
-                            router.push(item.link);
-                          }}
-                        >
-                          <Flex gap={"3"}>
-                            <Flex className="w-[20px]">{item.icon}</Flex>
-                            <Text className="">{item.label}</Text>
-                          </Flex>
-                        </Flex>
-                      </Flex>
-                    ))}
-                </Flex>
-              </motion.div>
-
-              <Flex className="border-b w-full" />
+    <Flex className="z-50">
+      {!isActive && (
+        <Tooltip content="Open Navigation Menu">
+          <Flex
+            className="h-24 w-8 border absolute top-[46%] bg-black rounded-e-lg cursor-pointer shadow-2xl text-white text-xs opacity-50"
+            direction={"column"}
+            onClick={() => setActive(true)}
+            align={"center"}
+            justify={"center"}
+          >
+            <DoubleArrowLeftIcon />
+          </Flex>
+        </Tooltip>
+      )}
+      <motion.div
+        className="bg-white overflow-hidden fixed border rounded-e-xl h-full shadow-2xl"
+        animate={isActive ? { width: "350px" } : { width: "0px" }}
+      >
+        <Flex className="w-full" p={"2"}>
+          <Flex
+            className="absolute top-8 right-5 cursor-pointer"
+            onClick={() => setActive(false)}
+          >
+            <Cross2Icon className="h-5 w-5" />
+          </Flex>
+          <Flex className="w-full rounded-lg" direction={"column"}>
+            <Flex className="h-[100px] w-full p-5">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Avicii_-_Logo.png"
+                className="h-full w-fit object-cover"
+              />
             </Flex>
-          ))}
+            <Flex className="p-4 pb-8 border-b">
+              <Heading className="text-nowrap">
+                <span className="text-blue-600">ReGift</span> Admin
+              </Heading>
+            </Flex>
+            <Flex py={"1"} gap={"1"} direction={"column"}>
+              {ListItems.map((item) => (
+                <Flex
+                  key={item.link}
+                  direction={"column"}
+                  gap={"1"}
+                  className="text-nowrap"
+                >
+                  <Flex
+                    className={
+                      "h-[60px] w-full px-5 cursor-pointer rounded-lg " +
+                      (isCurrentPath(item.link) && "bg-blue-600 text-white")
+                    }
+                    align={"center"}
+                    justify={"between"}
+                    onClick={() => {
+                      if (item.subLinks) {
+                        handleOpen(item.link);
+                        return;
+                      }
+                      router.push(item.link);
+                    }}
+                  >
+                    <Flex gap={"3"}>
+                      <Flex className="w-[20px]">{item.icon}</Flex>
+                      <Text className="">{item.label}</Text>
+                    </Flex>
+                    {item.subLinks && item.subLinks?.length > 0 && (
+                      <Flex>
+                        {!item.isOpen ? <CaretDownIcon /> : <CaretUpIcon />}
+                      </Flex>
+                    )}
+                  </Flex>
+
+                  <motion.div
+                    className="overflow-hidden"
+                    animate={
+                      item.isOpen ? { height: "fit-content" } : { height: 0 }
+                    }
+                  >
+                    <Flex direction={"column"} className="mb-5">
+                      {item.subLinks &&
+                        item.subLinks?.length > 0 &&
+                        item.subLinks.map((item) => (
+                          <Flex className="ml-10" key={item.link}>
+                            <Flex
+                              className={
+                                "h-[40px] w-full px-5 cursor-pointer rounded-lg " +
+                                (isCurrentPath(item.link) &&
+                                  "bg-blue-600 text-white")
+                              }
+                              align={"center"}
+                              justify={"between"}
+                              onClick={() => {
+                                router.push(item.link);
+                              }}
+                            >
+                              <Flex gap={"3"}>
+                                <Flex className="w-[20px]">{item.icon}</Flex>
+                                <Text className="">{item.label}</Text>
+                              </Flex>
+                            </Flex>
+                          </Flex>
+                        ))}
+                    </Flex>
+                  </motion.div>
+
+                  <Flex className="border-b w-full" />
+                </Flex>
+              ))}
+            </Flex>
+          </Flex>
         </Flex>
-      </Flex>
+      </motion.div>
     </Flex>
   );
 };
