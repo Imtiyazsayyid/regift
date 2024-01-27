@@ -82,6 +82,10 @@ const categorySchema = z.object({
     .string({ required_error: "Name is required" })
     .min(2, "Name is too small")
     .max(100, "Name is too long"),
+  key: z
+    .string({ required_error: "Key is required" })
+    .min(2, "Key is too small")
+    .max(100, "Key is too long"),
 });
 
 export {
