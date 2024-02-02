@@ -83,3 +83,21 @@ export async function getSingleDonatedItem(id) {
 export async function deleteDonatedItem(id) {
   return await Api().delete(`/donated-item/${id}`);
 }
+
+// Orders
+
+export async function getAllOrders(params) {
+  return await Api().get("/orders", { params });
+}
+
+export async function saveOrder(payload) {
+  return await Api().post("/orders", payload);
+}
+
+export async function getSingleOrder(id) {
+  return await Api().get(`/order/${id}`);
+}
+
+export async function deleteOrder(id) {
+  return await Api().delete(`/order/${id}`);
+}

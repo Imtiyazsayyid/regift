@@ -21,20 +21,15 @@ const donorSchema = z.object({
     .string({ required_error: "Password is required" })
     .min(3, "Password is too short")
     .max(45, "Password is too long"),
-  gender: z
-    .string({ required_error: "Gender is required" })
-    .refine((data) => allowedGenders.includes(data), {
-      message: "Invalid gender",
-    }),
+  gender: z.string({ required_error: "Gender is required" }).refine((data) => allowedGenders.includes(data), {
+    message: "Invalid gender",
+  }),
 });
 
 const allowedApprovalStatus = ["pending", "approved", "rejected"];
 
 const organisationSchema = z.object({
-  name: z
-    .string({ required_error: "Name is required" })
-    .min(2, "Name is too short")
-    .max(100, "Name is too long"),
+  name: z.string({ required_error: "Name is required" }).min(2, "Name is too short").max(100, "Name is too long"),
   email: z.string({ required_error: "Email is required" }).email(),
   password: z
     .string({ required_error: "Password is required" })
@@ -47,25 +42,14 @@ const organisationSchema = z.object({
     .max(255, "Address is too long"),
 });
 
-const allowedCondtions = [
-  "new",
-  "like_new",
-  "used_good",
-  "used_fair",
-  "used_poor",
-];
+const allowedCondtions = ["new", "like_new", "used_good", "used_fair", "used_poor"];
 
 const donatedItemSchema = z.object({
-  title: z
-    .string({ required_error: "Title is required" })
-    .min(2, "Title is too short")
-    .max(100, "Title is too long"),
+  title: z.string({ required_error: "Title is required" }).min(2, "Title is too short").max(100, "Title is too long"),
   image: z.string({ required_error: "Image is required" }),
-  condition: z
-    .string({ required_error: "Condition is required" })
-    .refine((data) => allowedCondtions.includes(data), {
-      message: "Invalid condition",
-    }),
+  condition: z.string({ required_error: "Condition is required" }).refine((data) => allowedCondtions.includes(data), {
+    message: "Invalid condition",
+  }),
   approvalStatus: z
     .string({ required_error: "Approval Status is required" })
     .refine((data) => allowedApprovalStatus.includes(data), {
@@ -76,21 +60,22 @@ const donatedItemSchema = z.object({
   donorId: z.number({ required_error: "Donor is required" }),
 });
 
-const categorySchema = z.object({
-  name: z
-    .string({ required_error: "Name is required" })
-    .min(2, "Name is too small")
-    .max(100, "Name is too long"),
-  key: z
-    .string({ required_error: "Key is required" })
-    .min(2, "Key is too small")
-    .max(100, "Key is too long"),
+const allowedOrderStatus = ["pending", "processing", "confirmed", "shipped", "delivered", "cancelled"];
+
+const orderSchema = z.object({
+  orderStatus: z
+    .string({ required_error: "Order Status is required" })
+    .refine((data) => allowedOrderStatus.includes(data), {
+      message: "Invalid Order status",
+    }),
+
+  donatedItemId: z.number({ required_error: "Donated Item is required" }),
+  organisationId: z.number({ required_error: "Organisation is required" }),
 });
 
-export {
-  donorSchema,
-  organisationSchema,
-  donatedItemSchema,
-  categorySchema,
-  loginSchema,
-};
+const categorySchema = z.object({
+  name: z.string({ required_error: "Name is required" }).min(2, "Name is too small").max(100, "Name is too long"),
+  key: z.string({ required_error: "Key is required" }).min(2, "Key is too small").max(100, "Key is too long"),
+});
+
+export { donorSchema, organisationSchema, donatedItemSchema, categorySchema, loginSchema, orderSchema };

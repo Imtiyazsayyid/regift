@@ -7,15 +7,10 @@ import "../theme-config.css";
 
 export const metadata: Metadata = {
   title: "Regift Admin",
-  description:
-    "The perfect place To give away unused items that can make some one else's life better",
+  description: "The perfect place To give away unused items that can make some one else's life better",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>

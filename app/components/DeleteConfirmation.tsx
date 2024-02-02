@@ -5,9 +5,11 @@ import React from "react";
 interface Props {
   confirmDelete: () => void;
   removedItem: string;
+  title?: string;
+  desc?: string;
 }
 
-const DeleteConfirmation = ({ confirmDelete, removedItem }: Props) => {
+const DeleteConfirmation = ({ confirmDelete, removedItem, title, desc }: Props) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
@@ -16,11 +18,15 @@ const DeleteConfirmation = ({ confirmDelete, removedItem }: Props) => {
         </Button>
       </AlertDialog.Trigger>
       <AlertDialog.Content style={{ maxWidth: 450 }}>
-        <AlertDialog.Title>Confirm Delete.</AlertDialog.Title>
-        <AlertDialog.Description size="2">
-          Are you sure you want to remove {removedItem}? <br />
-          This action cannot be reversed.
-        </AlertDialog.Description>
+        <AlertDialog.Title>{title || "Confirm Delete."}</AlertDialog.Title>
+        {desc ? (
+          <AlertDialog.Description size="2">{desc}</AlertDialog.Description>
+        ) : (
+          <AlertDialog.Description size="2">
+            Are you sure you want to remove {removedItem}? <br />
+            This action cannot be reversed.
+          </AlertDialog.Description>
+        )}
 
         <Flex gap="3" mt="8" justify="end">
           <AlertDialog.Cancel>

@@ -12,10 +12,24 @@ interface Props {
   deleteFunction?: () => Promise<AxiosResponse>;
   removedItem: string;
   editModal?: ReactNode;
+  deleteConfirmationDescription?: string;
+  deleteConfirmationTitle?: string;
+  hideEdit?: boolean;
+  hideDelete?: boolean;
   fetchData: () => {};
 }
 
-const TableActions = ({ id, deleteFunction, removedItem, fetchData, editModal }: Props) => {
+const TableActions = ({
+  id,
+  deleteFunction,
+  removedItem,
+  fetchData,
+  editModal,
+  deleteConfirmationDescription,
+  deleteConfirmationTitle,
+  hideEdit = false,
+  hideDelete = false,
+}: Props) => {
   const router = useRouter();
   const currentPath = usePathname();
 
@@ -44,13 +58,20 @@ const TableActions = ({ id, deleteFunction, removedItem, fetchData, editModal }:
           <EyeOpenIcon />
         </Button>
       )}
-      {id && (
+      {id && !hideEdit && (
         <Button variant="soft" color="violet" onClick={() => router.push(currentPath + "/edit/" + id)} radius="full">
           <Pencil2Icon />
         </Button>
       )}
       {editModal}
-      {deleteFunction && <DeleteConfirmation confirmDelete={handleDelete} removedItem={removedItem} />}
+      {deleteFunction && !hideDelete && (
+        <DeleteConfirmation
+          confirmDelete={handleDelete}
+          removedItem={removedItem}
+          title={deleteConfirmationTitle}
+          desc={deleteConfirmationDescription}
+        />
+      )}
     </Flex>
   );
 };

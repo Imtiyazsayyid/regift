@@ -2,22 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "rsuite/dist/rsuite.css";
+
 :root {
   --rs-primary-100: #e8e8e8;
-  --rs-primary-200: var(--violet-a6);
-  --rs-primary-300: var(--violet-a7);
-  --rs-primary-400: var(--violet-a8);
-  --rs-primary-500: var(--violet-a9);
-  --rs-primary-600: var(--violet-a10);
-  --rs-primary-700: var(--violet-a11);
-  --rs-primary-800: var(--violet-a12);
-  --rs-primary-900: var(--violet-a13);
+  --rs-primary-200: var(--blue-a6);
+  --rs-primary-300: var(--blue-a7);
+  --rs-primary-400: var(--blue-a8);
+  --rs-primary-500: var(--blue-a9);
+  --rs-primary-600: var(--blue-a10);
+  --rs-primary-700: var(--blue-a11);
+  --rs-primary-800: var(--blue-a12);
+  --rs-primary-900: var(--blue-a13);
 }
 
 /* hello */
 
 .rs-btn-primary {
-  background-color: var(--violet-a9);
+  background-color: var(--blue-a9);
 }
 
 body {
@@ -29,7 +31,7 @@ body {
 } */
 
 .rs-btn-sm {
-  background-color: var(--violet-a9);
+  background-color: var(--blue-a9);
   color: white;
   height: 2rem;
 }
@@ -39,11 +41,11 @@ body {
 }
 
 .rs-picker-default .rs-picker-toggle {
-  background-color: var(--violet-a3) !important;
+  background-color: var(--blue-a3) !important;
 }
 
 .rs-picker-select-menu-item:hover {
-  background-color: var(--violet-a9) !important;
+  background-color: var(--blue-a9) !important;
   border-radius: 0.5rem;
   color: white;
 }
@@ -60,9 +62,17 @@ body {
   overflow: hidden;
 }
 
+.rs-input-group-sm {
+  overflow: hidden;
+  height: 33px;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
 .rs-input {
-  background: var(--blue-a3);
+  /* background: var(--blue-a3); */
   border-radius: 0;
+  /* height: 2rem; */
 }
 
 .rs-picker-error > .rs-input-group:focus-within {
