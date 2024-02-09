@@ -66,7 +66,9 @@ const ViewDonorPage = ({ params }: Props) => {
 
         <Flex direction={"column"} gap="2">
           <Text className="text-sm text-slate-500 text-center">Address</Text>
-          <Flex direction={"column"}>{breakLines(donor?.address, Text) || "-"} </Flex>
+          <Flex direction={"column"} align={"center"}>
+            {breakLines(donor?.address, Text) || "-"}{" "}
+          </Flex>
         </Flex>
       </Grid>
     </Flex>
