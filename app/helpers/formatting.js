@@ -19,3 +19,19 @@ export function breakLines(text, Container) {
     </Container>
   ));
 }
+
+export function abbreviate(text) {
+  let abbr = "";
+
+  if (!text) return "";
+
+  let textArray = text.split(" ");
+
+  if (textArray.length === 0) return "?";
+
+  for (let word of textArray) {
+    abbr += word.charAt(0);
+  }
+
+  return abbr;
+}

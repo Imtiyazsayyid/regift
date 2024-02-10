@@ -7,7 +7,7 @@ import * as AdminServices from "../../../../Services/AdminServices";
 import { Donor } from "@/app/interfaces/DonorInterface";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { humanize, breakLines } from "../../../../helpers/formatting";
+import { humanize, breakLines, abbreviate } from "../../../../helpers/formatting";
 
 interface Props {
   params: {
@@ -38,16 +38,13 @@ const ViewDonorPage = ({ params }: Props) => {
     <Flex className="w-full p-10 overflow-hidden overflow-y-auto" direction={"column"} gap={"5"} align={"center"}>
       {/* logo */}
       <Flex className="w-40 h-40" gap={"4"} align={"center"}>
-          {donor?.profileImg && (
-            <Avatar
-              fallback={"?"}
-              className="cursor-pointer"
-              size={"9"}
-              my={"9"}
-              src={donor?.profileImg}
-              alt={`Profile Image of ${donor.firstName}`}
-            />
-          )}
+        <Avatar
+          fallback={abbreviate(donor?.firstName + " " + donor?.lastName) || "?"}
+          className="cursor-pointer"
+          size={"9"}
+          my={"9"}
+          src={donor?.profileImg || ""}
+        />
       </Flex>
       <Flex direction={"column"} align={"center"} gap={"2"}>
         <Heading align={"center"}>

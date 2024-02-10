@@ -34,56 +34,36 @@ const ViewOrderPage = ({ params }: Props) => {
   }, []);
 
   return (
-    <Flex
-      className="w-full p-10 overflow-hidden overflow-y-auto"
-      direction={"column"}
-      gap={"5"}
-      align={"center"}
-    >
+    <Flex className="w-full p-10 overflow-hidden overflow-y-auto" direction={"column"} gap={"5"} align={"center"}>
       {/* logo */}
       <Flex className="w-40 h-40" gap={"4"} align={"center"}>
-          {order?.donatedItem?.image && (
-            <Avatar
-              fallback={"?"}
-              className="cursor-pointer"
-              size={"9"}
-              my={"9"}
-              src={order?.donatedItem?.image}
-              alt={`Image of ${order?.donatedItem?.title}`}
-            />
-          )}
+        {order?.donatedItem?.image && (
+          <Avatar fallback={"?"} className="cursor-pointer" size={"9"} my={"9"} src={order?.donatedItem?.image} />
+        )}
       </Flex>
 
       <Flex direction={"column"} align={"center"} gap={"2"}>
-        <Heading align={"center"}>{order?.id}</Heading>
+        <Heading align={"center"}>#{order?.id}</Heading>
         <Text className="text-sm text-slate-500">Order</Text>
       </Flex>
       <Seperator />
       <Grid columns={"3"} className="w-full" gapY={"9"} p={"9"}>
         <Flex direction={"column"} gap="2">
-          <Text className="text-sm text-slate-500 text-center">
-            Donated Item
-          </Text>
+          <Text className="text-sm text-slate-500 text-center">Donated Item</Text>
           <Text className="text-center">
-            {"#"} {order?.donatedItemId} {"-"}{" "}
-            {order?.donatedItem?.title || "-"}
+            {"#"} {order?.donatedItemId} {"-"} {order?.donatedItem?.title || "-"}
           </Text>
         </Flex>
         <Flex direction={"column"} gap="2">
-          <Text className="text-sm text-slate-500 text-center">
-            Order Id
-          </Text>
+          <Text className="text-sm text-slate-500 text-center">Order Id</Text>
           <Text className="text-center">
             {"#"} {order?.id}
           </Text>
         </Flex>
         <Flex direction={"column"} gap="2">
-          <Text className="text-sm text-slate-500 text-center">
-            Organisation Name
-          </Text>
+          <Text className="text-sm text-slate-500 text-center">Organisation Name</Text>
           <Text className="text-center">
-            {"#"} {order?.organisationId} {"-"}{" "}
-            {order?.organisation?.name || "-"}
+            {"#"} {order?.organisationId} {"-"} {order?.organisation?.name || "-"}
           </Text>
         </Flex>
 
@@ -106,14 +86,10 @@ const ViewOrderPage = ({ params }: Props) => {
             {order?.donatedItem?.description || "-"}{" "}
           </Flex>
         </Flex>
-        
+
         <Flex direction={"column"} gap="2">
-          <Text className="text-sm text-slate-500 text-center">
-            Order Status
-          </Text>
-          <Text className="text-center">
-            {humanize(order?.orderStatus) || "-"}{" "}
-          </Text>
+          <Text className="text-sm text-slate-500 text-center">Order Status</Text>
+          <Text className="text-center">{humanize(order?.orderStatus) || "-"} </Text>
         </Flex>
       </Grid>
     </Flex>

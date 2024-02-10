@@ -7,13 +7,13 @@ import * as AdminServices from "../../../../Services/AdminServices";
 import { Organisation } from "@/app/interfaces/OrganisationInterface";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { humanize, breakLines } from "../../../../helpers/formatting";
+import { humanize, breakLines, abbreviate } from "../../../../helpers/formatting";
 import { CldImage } from "next-cloudinary";
 
-interface Props{
+interface Props {
   params: {
-    organisationId: string,
-  }
+    organisationId: string;
+  };
 }
 
 const ViewOrganisationPage = ({ params }: Props) => {
@@ -24,7 +24,7 @@ const ViewOrganisationPage = ({ params }: Props) => {
     const res = await AdminServices.getSingleOrganisation(params.organisationId);
     console.log(res);
 
-    if(!res.status){
+    if (!res.status) {
       toast.error("Could Not Get Organisation");
       router.back();
     }
@@ -37,25 +37,19 @@ const ViewOrganisationPage = ({ params }: Props) => {
 
   return (
     <Flex className="w-full p-10 overflow-hidden overflow-y-auto" direction={"column"} gap={"5"} align={"center"}>
-
       {/* logo */}
       <Flex className="w-40 h-40" gap={"4"} align={"center"}>
-          {organisation?.logo && (
-            <Avatar
-              fallback={"?"}
-              className="cursor-pointer"
-              size={"9"}
-              my={"9"}
-              src={organisation?.logo}
-              alt={`Logo of ${organisation.name}`}
-            />
-          )}
+        <Avatar
+          fallback={organisation?.acronym || "?"}
+          className="cursor-pointer text-3xl"
+          size={"9"}
+          my={"9"}
+          src={organisation?.logo || ""}
+        />
       </Flex>
 
       <Flex direction={"column"} align={"center"} gap={"2"}>
-        <Heading align={"center"}>
-          {organisation?.name} 
-        </Heading>
+        <Heading align={"center"}>{organisation?.name}</Heading>
         <Text className="text-sm text-slate-500">Organisation</Text>
       </Flex>
       <Seperator />
@@ -93,7 +87,7 @@ const ViewOrganisationPage = ({ params }: Props) => {
         </Flex>
       </Grid>
     </Flex>
-  )
-}
+  );
+};
 
 export default ViewOrganisationPage;
