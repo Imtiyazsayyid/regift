@@ -101,3 +101,20 @@ export async function getSingleOrder(id) {
 export async function deleteOrder(id) {
   return await Api().delete(`/order/${id}`);
 }
+
+// charts
+export async function chartOrders(params) {
+  return await Api().get("/chart-orders", { params });
+}
+
+export async function chartDonations(params) {
+  return await Api().get("/chart-donations", { params });
+}
+
+export async function chartDonors(params) {
+  return await Api().get("/chart-donors", { params });
+}
+
+export async function chartOrganisations(params) {
+  return await Api().get("/chart-organisations", { params });
+}
