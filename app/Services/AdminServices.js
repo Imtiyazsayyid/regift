@@ -118,3 +118,15 @@ export async function chartDonors(params) {
 export async function chartOrganisations(params) {
   return await Api().get("/chart-organisations", { params });
 }
+
+export async function chartCounts(params) {
+  return await Api().get("/chart-counts", { params });
+}
+
+export async function chartOrdersByCategory(params) {
+  return await Api().get("/chart-orders-by-category", { params });
+}
+
+export async function chartDonationsByCategory(params) {
+  return await Api().get("/chart-donations-by-category", { params });
+}

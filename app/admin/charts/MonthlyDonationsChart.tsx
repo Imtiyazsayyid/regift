@@ -14,6 +14,7 @@ import {
 import { Line } from "react-chartjs-2";
 import axios from "axios";
 import * as AdminServices from "../../Services/AdminServices";
+import Loader from "@/app/components/Loader";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
 
@@ -39,6 +40,7 @@ interface Props {
 
 export default function MonthlyDonationChart({ dateRange }: Props) {
   const [data, setData] = useState<any>();
+  const [loading, setLoading] = useState(true);
 
   const getDonationByMonth = async () => {
     const res = await AdminServices.chartDonations({
@@ -61,11 +63,17 @@ export default function MonthlyDonationChart({ dateRange }: Props) {
         },
       ],
     });
+
+    setLoading(false);
   };
 
   useEffect(() => {
     getDonationByMonth();
   }, [dateRange.startDate, dateRange.endDate]);
 
-  return <>{data && <Line options={{ ...options }} data={data} />}</>;
+  if (loading) {
+    return <Loader isLoading={loading} />;
+  }
+
+  return <>{data && <Line options={{ ...options }} data={data} height={"250px"} width={"600px"} />}</>;
 }
