@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  CaretDownIcon,
-  CaretUpIcon,
-  Cross2Icon,
-  DoubleArrowLeftIcon,
-} from "@radix-ui/react-icons";
+import { CaretDownIcon, CaretUpIcon, Cross2Icon, DoubleArrowLeftIcon } from "@radix-ui/react-icons";
 import { Flex, Heading, Text, Tooltip } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
@@ -17,6 +12,7 @@ import { RiLayout2Fill } from "react-icons/ri";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { FaGift } from "react-icons/fa6";
 import { BiSolidCategory } from "react-icons/bi";
+import { BsGlobe2 } from "react-icons/bs";
 import { useState } from "react";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FaSuitcase } from "react-icons/fa6";
@@ -109,19 +105,14 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
   const currentPath = usePathname();
 
   const handleOpen = (link: string) => {
-    const updatedListItems = ListItems.map((item) =>
-      item.link === link ? { ...item, isOpen: !item.isOpen } : item
-    );
+    const updatedListItems = ListItems.map((item) => (item.link === link ? { ...item, isOpen: !item.isOpen } : item));
     setListItems(updatedListItems);
   };
 
   const isCurrentPath = (itemLink: string) => {
     if (itemLink === "/admin" && currentPath === "/admin") {
       return true; // Exact match for home
-    } else if (
-      itemLink !== "/admin" &&
-      currentPath.substring(6).startsWith(itemLink.substring(6))
-    ) {
+    } else if (itemLink !== "/admin" && currentPath.substring(6).startsWith(itemLink.substring(6))) {
       return true; // Starts with for other links
     } else {
       return false;
@@ -148,32 +139,19 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
         animate={isActive ? { width: "350px" } : { width: "0px" }}
       >
         <Flex className="w-full" p={"2"}>
-          <Flex
-            className="absolute top-8 right-5 cursor-pointer"
-            onClick={() => setActive(false)}
-          >
+          <Flex className="absolute top-8 right-5 cursor-pointer" onClick={() => setActive(false)}>
             <Cross2Icon className="h-5 w-5" />
           </Flex>
           <Flex className="w-full rounded-lg" direction={"column"}>
-            <Flex className="h-[100px] w-full p-5">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Avicii_-_Logo.png"
-                className="h-full w-fit object-cover"
-              />
-            </Flex>
-            <Flex className="p-4 pb-8 border-b">
-              <Heading className="text-nowrap">
+            <Flex className="p-4 pb-8 pt-0 border-b mt-16" gap={"2"} align={"center"}>
+              <BsGlobe2 className="text-5xl" />
+              <Heading className="text-nowrap" size={"8"}>
                 <span className="text-blue-600">ReGift</span> Admin
               </Heading>
             </Flex>
             <Flex py={"1"} gap={"1"} direction={"column"}>
               {ListItems.map((item) => (
-                <Flex
-                  key={item.link}
-                  direction={"column"}
-                  gap={"1"}
-                  className="text-nowrap"
-                >
+                <Flex key={item.link} direction={"column"} gap={"1"} className="text-nowrap">
                   <Flex
                     className={
                       "h-[60px] w-full px-5 cursor-pointer rounded-lg " +
@@ -194,17 +172,13 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
                       <Text className="">{item.label}</Text>
                     </Flex>
                     {item.subLinks && item.subLinks?.length > 0 && (
-                      <Flex>
-                        {!item.isOpen ? <CaretDownIcon /> : <CaretUpIcon />}
-                      </Flex>
+                      <Flex>{!item.isOpen ? <CaretDownIcon /> : <CaretUpIcon />}</Flex>
                     )}
                   </Flex>
 
                   <motion.div
                     className="overflow-hidden"
-                    animate={
-                      item.isOpen ? { height: "fit-content" } : { height: 0 }
-                    }
+                    animate={item.isOpen ? { height: "fit-content" } : { height: 0 }}
                   >
                     <Flex direction={"column"} className="mb-5">
                       {item.subLinks &&
@@ -214,8 +188,7 @@ const VerticalNavbar = ({ isActive, setActive }: Props) => {
                             <Flex
                               className={
                                 "h-[40px] w-full px-5 cursor-pointer rounded-lg " +
-                                (isCurrentPath(item.link) &&
-                                  "bg-blue-600 text-white")
+                                (isCurrentPath(item.link) && "bg-blue-600 text-white")
                               }
                               align={"center"}
                               justify={"between"}

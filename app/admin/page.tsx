@@ -45,7 +45,7 @@ export default function Home() {
     <main className="h-full w-full p-10 overflow-hidden overflow-y-auto">
       <Flex direction={"column"} gap={"2"}>
         <Flex className="mt-10" justify={"center"}>
-          <Heading size={"9"}>Regift Analytics.</Heading>
+          <Heading size={"9"}>ReGift Analytics.</Heading>
         </Flex>
         <Flex justify={"center"}>
           <Flex className="w-1/2">
