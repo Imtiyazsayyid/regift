@@ -8,6 +8,10 @@ import "../theme-config.css";
 export const metadata: Metadata = {
   title: "Regift Admin",
   description: "The perfect place To give away unused items that can make some one else's life better",
+  manifest: "./manifest.json",
+  icons: {
+    apple: "./icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
