@@ -3,6 +3,13 @@
 requirements:
 node v18.18.2
 
+LOGIN CREDENTIALS (once run locally or on live website)
+
+email: admin@regift.com
+
+password: admin
+
+
 Open Terminal and Run
 
 1. `git clone https://github.com/Imtiyazsayyid/regift-admin.git`
